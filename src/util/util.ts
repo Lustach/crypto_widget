@@ -2,14 +2,8 @@ import img from '../images/fundLogo.png';
 import btc from '../images/btc.svg'
 import eth from '../images/eth.svg'
 import arrow from '../images/arrow.svg'
-// @ts-ignore
-// import {BVSelect} from '../Multiselect/js/bvselect.js'
 
-// console.log(BVSelect)
-// @ts-ignore
 export class WidgetContainer {
-    // private static classContainer: string = 'padding: 11.7px 16px 0 16px'
-
     public logoSrc: string = img;
     public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
     public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'

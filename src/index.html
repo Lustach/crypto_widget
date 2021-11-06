@@ -16,35 +16,16 @@
 </div>
 
 </body>
-<!--<script src="node_modules/nice-select2/dist/js/nice-select2.js"></script>-->
-<!--<script src="node_modules/nice-select2/dist/css/nice-select2.css"></script>-->
-<!--<script type="text/javascript" src="Multiselect/js/bvselect.js">-->
-<!--    document.addEventListener("DOMContentLoaded", function() {-->
-<!--        var demo1 = new BVSelect({-->
-<!--            selector: "#selectbox",-->
-<!--            width: "100%",-->
-<!--            searchbox: true,-->
-<!--            offset: true,-->
-<!--            placeholder: "Select Option",-->
-<!--            search_placeholder: "Search...",-->
-<!--            search_autofocus: true,-->
-<!--            breakpoint: 450-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 <script type="text/javascript">
     (function() {
         var init = function() {
-            myCompanyApi.button('button-container-5ef9b197c865f');
+            myCompanyApi.widgetContainer('button-container-5ef9b197c865f');
         };
         if (typeof myCompanyApi !== 'undefined') {
             init();
         } else {
             (myCompanyApiInitCallbacks = window.myCompanyApiInitCallbacks || []).push(init);
         }
-        // console.log(window)
-        // const test = require('nice-select2')
-        // test.bind(document.getElementById("a-select"))
     })();
 </script>
 </html>
