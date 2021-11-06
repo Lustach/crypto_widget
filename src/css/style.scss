@@ -1,0 +1,106 @@
+//.hui{
+//    &_hui{
+//        color: red;
+//    }
+//}
+*{// todo нужно сделать специфичность селекторов иначе хуета будет на чужих сайтах
+  box-sizing: border-box;
+}
+h6,h5{
+  margin: 0;
+}
+.w_blg {
+  &-fund{
+    &__header{
+      display: flex;
+      h6{
+        width: 204px;
+        height: 40px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.01em;
+        color: #031726;
+        margin: 0px 12px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+  &-title,&-subtitle{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 25px;
+    text-align: center;
+    color: #031726;
+    margin-top: 23.57px;
+    margin-bottom: 16px;
+    padding: 0 2px;
+  }
+  &-subtitle{
+    margin: 0 0 12px 0;
+  }
+  &-step {
+    &_1{
+      &__container{
+        width: 100%;
+        max-width: 328px;
+        height: 188px;
+        background: #DFEBF7;
+        border-radius: 5px;
+        padding: 12px;
+        margin-bottom: 32px;
+      }
+    }
+    &_container {
+      height: 522px;
+      max-width: 360px;
+      width: 100%;
+      background: #FFFFFF;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      padding: 12px 16px 0 16px;
+      position: relative;
+      p{
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.02em;
+        color: #031726;
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;
+        margin: 8px 0px;
+      }
+    }
+
+    &_footer {
+      position: absolute;
+      height: 51px;
+      background: #0F75BD;
+      border: 3px solid #0F75BD;
+      border-radius: 5px;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 30px;
+      text-align: center;
+      color: #F1F5F7;
+      cursor: pointer;
+      &:hover{
+        filter: brightness(110%);
+      }
+    }
+  }
+}

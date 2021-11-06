@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+TITTTT
+<div id="button-container-5ef9b197c865f">
+</div>
+</body>
+<script type="text/javascript">
+    (function() {
+        var init = function() {
+            myCompanyApi.button('button-container-5ef9b197c865f');
+        };
+        if (typeof myCompanyApi !== 'undefined') {
+            init();
+        } else {
+            (myCompanyApiInitCallbacks = window.myCompanyApiInitCallbacks || []).push(init);
+        }
+    })();
+</script>
+</html>
