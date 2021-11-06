@@ -1,0 +1,33 @@
+
+.w_blg{
+  &-step{
+    &_2{
+      &__subtitle{
+        width: 270px;
+        margin: 0 auto;
+        height: 40px;
+        left: 16px;
+        top: 218px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #031726;
+      }
+      &_ltc{
+
+      }
+      &_timer{
+
+      }
+      &__qr_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 16px 0;
+      }
+    }
+  }
+}

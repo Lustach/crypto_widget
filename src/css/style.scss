@@ -3,6 +3,7 @@
 //        color: red;
 //    }
 //}
+@import "step2";
 *{// todo нужно сделать специфичность селекторов иначе хуета будет на чужих сайтах
   box-sizing: border-box;
 }
@@ -102,6 +103,7 @@ h6,h5{
         }
       }
     }
+
     &_container {
       height: 640px;
       max-width: 360px;
