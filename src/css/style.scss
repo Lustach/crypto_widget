@@ -48,15 +48,62 @@ h6,h5{
       &__container{
         width: 100%;
         max-width: 328px;
-        height: 188px;
+        max-height: 188px;
         background: #DFEBF7;
         border-radius: 5px;
         padding: 12px;
         margin-bottom: 32px;
       }
+      &_crypto{
+        &__container{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 24px;
+        }
+        &-item {
+          cursor: pointer;
+          //&:hover{
+          //  background-color: #73b7ff;
+          //}
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 5px 12px;
+          position: static;
+          height: 40px;
+          left: 0px;
+          top: 0px;
+          border: 2px solid #7BC2F4;
+          box-sizing: border-box;
+          border-radius: 5px;
+          flex: none;
+          order: 0;
+          flex-grow: 1;
+          max-width: 152px;
+          width: 100%;
+          background-color: white;
+          img{
+            margin-right: 8px;
+            span{
+              width: 48px;
+              height: 30px;
+              left: 44px;
+              top: 5px;
+
+              font-style: normal;
+              font-weight: 600;
+              font-size: 13px;
+              line-height: 30px;
+              text-align: center;
+            }
+          }
+          //margin: 0px 24px;
+        }
+      }
     }
     &_container {
-      height: 522px;
+      height: 640px;
       max-width: 360px;
       width: 100%;
       background: #FFFFFF;
@@ -100,6 +147,11 @@ h6,h5{
       cursor: pointer;
       &:hover{
         filter: brightness(110%);
+      }
+      img{
+        width: 13.31px;
+        height:17.66px;
+        margin-left: 11px;
       }
     }
   }

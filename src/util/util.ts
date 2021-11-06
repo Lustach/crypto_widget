@@ -1,13 +1,18 @@
-// @ts-ignore
 import img from '../images/fundLogo.png';
-
+import btc from '../images/btc.svg'
+import eth from '../images/eth.svg'
+import arrow from '../images/arrow.svg'
 // @ts-ignore
-export class Util {
+// import {BVSelect} from '../Multiselect/js/bvselect.js'
+
+// console.log(BVSelect)
+// @ts-ignore
+export class WidgetContainer {
     // private static classContainer: string = 'padding: 11.7px 16px 0 16px'
 
     public logoSrc: string = img;
     public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
-    public description: string = 'Фонд помогает детям-сиротам и детям    из неблагополучных семей    в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды    и подарков детям на праздники.'
+    public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
 
     createStepContainer(): HTMLElement {
         let container = document.createElement('div')
@@ -20,6 +25,17 @@ export class Util {
         container.appendChild(this.createFundInfoContainer())
         container.appendChild(this.createSubTitle())
         container.appendChild(this.createFooter())
+        let cryptoBtnContainer = this.createCryptoBtnContainer()
+        cryptoBtnContainer.appendChild(this.createCryptoBtn(btc,'Bitcoin'))
+        cryptoBtnContainer.appendChild(this.createCryptoBtn(eth,'Ethereum'))
+        container.appendChild(cryptoBtnContainer)
+        container.appendChild(this.createCryptoSelect())
+
+        // container.appendChild(this.createCryptoBtnContainer().appendChild(this.createCryptoBtn(btc,'Bitcoin')))
+        // container.appendChild(this.createCryptoBtnContainer().appendChild(this.createCryptoBtn(eth,'Ethereum')))
+        // container.appendChild(this.createCryptoBtn(btc,'Bitcoin'))
+        // container.appendChild(this.createCryptoBtn(eth,'Ethereum'))
+        // Ethereum
         // for (const footerElement in [footerSpan,footerImg]) {
         //     // @ts-ignore
         //     footer.appendChild(footerElement)
@@ -31,6 +47,7 @@ export class Util {
         let footer = document.createElement('div')
         let footerSpan = document.createElement('span')
         let footerImg = document.createElement('img')
+        footerImg.setAttribute('src',arrow)
         footerSpan.innerHTML = 'Продолжить'
         footer.classList.add('w_blg-step_footer')
         footer.appendChild(footerSpan)
@@ -44,6 +61,7 @@ export class Util {
         h5.classList.add('w_blg-title')
         return h5
     }
+
     createSubTitle(): HTMLElement {
         let h5 = document.createElement('h5')
         h5.innerHTML = 'Выберите криптовалюту'
@@ -52,13 +70,6 @@ export class Util {
     }
 
     createFundInfoContainer(): HTMLElement {
-        // img{
-        //     min-width: 117px;
-        //     height: 45px;
-        //     border-radius: 5px;
-        //     object-fit: contain;
-        //     margin-right: 13px;
-        // }
         let container = document.createElement('div')
         let fundHeader = document.createElement('div')
         let fundLogo = document.createElement('img')
@@ -76,95 +87,37 @@ export class Util {
         return container
     }
 
-    // static createStep
-    // static setTagAttributes({tagName:string,}){
-    //     console.log(tagName)
-    // }
-    static createCssStyle() {
-        // console.log(test)
-        let style = document.createElement('style');
-        style.type = 'text/css';
-        // style.innerHTML = `
-        // // div{
-        // //     background-color: red;
-        // // }
-        //     .icon {
-        //         cursor: pointer;
-        //         width: 70%;
-        //         position: absolute;
-        //         top: 9px;
-        //         left: 9px;
-        //         transition: transform .3s ease;
-        //     }
-        //     .hidden {
-        //         transform: scale(0);
-        //     }
-        //     .button-container {
-        //         background-color: #04b73f;
-        //         width: 60px;
-        //         height: 60px;
-        //         border-radius: 50%;
-        //     }
-        //     .message-container {
-        //         box-shadow: 0 0 18px 8px rgba(0, 0, 0, 0.1), 0 0 32px 32px rgba(0, 0, 0, 0.08);
-        //         width: 400px;
-        //         right: -25px;
-        //         bottom: 75px;
-        //         max-height: 400px;
-        //         position: absolute;
-        //         transition: max-height .2s ease;
-        //         font-family: Helvetica, Arial ,sans-serif;
-        //     }
-        //     .message-container.hidden {
-        //         max-height: 0px;
-        //     }
-        //     .message-container h2 {
-        //         margin: 0;
-        //         padding: 20px 20px;
-        //         color: #fff;
-        //         background-color: #04b73f;
-        //     }
-        //     .message-container .content {
-        //         margin: 20px 10px ;
-        //         border: 1px solid #dbdbdb;
-        //         padding: 10px;
-        //         display: flex;
-        //         background-color: #fff;
-        //         flex-direction: column;
-        //     }
-        //     .message-container form * {
-        //         margin: 5px 0;
-        //     }
-        //     .message-container form input {
-        //         padding: 10px;
-        //     }
-        //     .message-container form textarea {
-        //         height: 100px;
-        //         padding: 10px;
-        //     }
-        //     .message-container form textarea::placeholder {
-        //         font-family: Helvetica, Arial ,sans-serif;
-        //     }
-        //     .message-container form button {
-        //         cursor: pointer;
-        //         background-color: #04b73f;
-        //         color: #fff;
-        //         border: 0;
-        //         border-radius: 4px;
-        //         padding: 10px;
-        //     }
-        //     .message-container form button:hover {
-        //         background-color: #16632f;
-        //     }
-        // `.replace(/^\s+|\n/gm, '');
-        document.head.appendChild(style);
+    createCryptoBtn(btnImgSrc: string,btnNameD: string):HTMLElement{
+        // let btnImgSrc = ''
+        // let btnNameD = ''
+        // let container = document.createElement('div')
+        let btn = document.createElement('button')
+        let btnImg = document.createElement('img')
+        let btnName = document.createElement('span')
+        btnImg.setAttribute('src',btnImgSrc)
+        btnName.innerHTML=btnNameD
+        btn.appendChild(btnImg)
+        btn.appendChild(btnName)
+        btn.classList.add('w_blg-step_1_crypto-item')
+        return btn
     }
 
-    // public constructor(src: string, title: string, description: string) {
-    //     this.logoSrc = src
-    //     this.title = title
-    //     this.description = description
-    // }
+    createCryptoBtnContainer():HTMLElement{
+        let container = document.createElement('div')
+        container.classList.add('w_blg-step_1_crypto__container')
+        return container
+    }
+
+    createCryptoSelect():HTMLElement{
+        let select = document.createElement('select')
+        select.setAttribute('id','selectBox')
+        let option = document.createElement('option')
+        option.setAttribute('value','value1')
+        option.innerHTML='Value1'
+        select.appendChild(option)
+        console.log('haha')
+        return select
+    }
 }
 
 // class s

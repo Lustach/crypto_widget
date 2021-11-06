@@ -52,6 +52,7 @@ module.exports = {
                         options: {
                             bypassOnDebug: true, // webpack@1.x
                             disable: true, // webpack@2.x and newer
+                            name: 'images/[name].[ext]'
                         },
                     },
                 ],
