@@ -1,4 +1,5 @@
 import qr from '../images/qr.png';
+import copy from '../images/copy.svg'
 // import btc from '../images/btc.svg'
 // import eth from '../images/eth.svg'
 // import arrow from '../images/arrow.svg'
@@ -27,8 +28,31 @@ export class Step2 {
         return container
     }
     //
-    // createInput():HTMLElement{
-    //
-    //
-    // }
+    createInput(labelName:string,inputValue?:string|number):HTMLElement{
+        let container = document.createElement('div')
+        let input = document.createElement('input')
+        let label = document.createElement('label')
+        let icon = document.createElement('img')
+        icon.addEventListener('click',()=>{
+            console.log(input.value)
+            navigator.clipboard.writeText(input.value).then(function() {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function(err) {
+                console.error('Async: Could not copy text: ', err);
+            })
+        })
+        icon.setAttribute('src',copy)
+        container.classList.add('w_blg-step_2__input-container')
+        label.innerHTML=labelName
+        container.appendChild(label)
+        container.appendChild(input)
+        container.appendChild(icon)
+        return container
+    }
+    createInscription():HTMLElement{
+        let container = document.createElement('p')
+        container.classList.add('w_blg-step_2__inscription')
+        container.innerHTML='*Минимальная сумма: ХX LTC'
+        return container
+    }
 }

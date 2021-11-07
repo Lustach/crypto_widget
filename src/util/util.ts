@@ -2,6 +2,7 @@ import img from '../images/fundLogo.png';
 import btc from '../images/btc.svg'
 import eth from '../images/eth.svg'
 import arrow from '../images/arrow.svg'
+import Logo from '../images/Logo.svg'
 import {Step2} from "./step2";
 
 // enum Steps {}
@@ -16,8 +17,11 @@ export class WidgetContainer extends Step2 {
     createStepContainer(): HTMLElement {
         let container = document.createElement('div')
         let header = document.createElement('div')
+        let logo = document.createElement('img')
+        logo.setAttribute('src',Logo)
         header.classList.add('w_blg-step_header')
         container.classList.add('w_blg-step_container')
+        container.appendChild(logo)
         container.appendChild(header)
         container.appendChild(this.createTitle())
         container.appendChild(this.createFundInfoContainer())
@@ -31,6 +35,12 @@ export class WidgetContainer extends Step2 {
         } else if (this.stepIndex === 2) {
             container.appendChild(this.step2.createSubTitle())
             container.appendChild(this.createQr())
+            let inputContainer = document.createElement('div')
+            inputContainer.classList.add('w_blg-step_2__inputs-container')
+            inputContainer.appendChild(this.createInput('Адрес кошелька'))
+            inputContainer.appendChild(this.createInput('MEMO'))
+            container.appendChild(inputContainer)
+            container.appendChild(this.createInscription())
             // console.log(this.step2)
         }
         container.appendChild(this.createFooter())
@@ -81,6 +91,7 @@ export class WidgetContainer extends Step2 {
         container.appendChild(fundHeader)
         if (this.stepIndex === 1) {
             let fundInfo = document.createElement('p')
+            fundInfo.classList.add('w_blg-step_1__fund-description')
             fundInfo.innerHTML = this.description
             container.appendChild(fundInfo)
         }
