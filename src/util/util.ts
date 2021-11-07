@@ -4,6 +4,7 @@ import eth from '../images/eth.svg'
 import arrow from '../images/arrow.svg'
 import Logo from '../images/Logo.svg'
 import {Step2} from "./step2";
+import {Step3} from "./step3";
 
 // enum Steps {}
 
@@ -11,19 +12,24 @@ export class WidgetContainer extends Step2 {
     public logoSrc: string = img;
     public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
     public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
-    public stepIndex: number = 2
+    public stepIndex: number = 3
     protected step2 = new Step2()
+    protected step3 = new Step3()
 
     createStepContainer(): HTMLElement {
         let container = document.createElement('div')
         let header = document.createElement('div')
         let logo = document.createElement('img')
         logo.setAttribute('src',Logo)
+        this.stepIndex!==3 ?logo.style.marginBottom='23.57px': logo.style.marginBottom = '62px'
+        // logo.classList.add('w_blg-logo')
         header.classList.add('w_blg-step_header')
         container.classList.add('w_blg-step_container')
         container.appendChild(logo)
         container.appendChild(header)
-        container.appendChild(this.createTitle())
+        if(this.stepIndex!==3) {
+            container.appendChild(this.createTitle())
+        }
         container.appendChild(this.createFundInfoContainer())
         if (this.stepIndex === 1) {
             container.appendChild(this.createSubTitle())
@@ -42,6 +48,9 @@ export class WidgetContainer extends Step2 {
             container.appendChild(inputContainer)
             container.appendChild(this.createInscription())
             // console.log(this.step2)
+        }else if(this.stepIndex===3){
+            container.appendChild(this.step3.createTitle())
+            container.appendChild(this.step3.createImg())
         }
         container.appendChild(this.createFooter())
         return container

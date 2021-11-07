@@ -1,0 +1,25 @@
+.w_blg {
+  &-step {
+    &_3 {
+      &__inscription {
+        text-align: center;
+        height: 20px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: #0F75BD;
+        margin: 0 0 24px 0;
+      }
+      &__img{
+        &-container{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+//w_blg-step_3__img-container
+//w_blg-step_3__img-container

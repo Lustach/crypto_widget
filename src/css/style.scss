@@ -4,6 +4,7 @@
 //    }
 //}
 @import "step2";
+@import "step3";
 *{// todo нужно сделать специфичность селекторов иначе хуета будет на чужих сайтах
   box-sizing: border-box;
 }
@@ -11,6 +12,9 @@ h6,h5{
   margin: 0;
 }
 .w_blg {
+  //&-logo{
+  //  margin-bottom: 23.57px;
+  //}
   &-fund{
     &__header{
       display: flex;
@@ -37,7 +41,6 @@ h6,h5{
     line-height: 25px;
     text-align: center;
     color: #031726;
-    margin-top: 23.57px;
     margin-bottom: 16px;
     padding: 0 2px;
   }

@@ -1,12 +1,13 @@
 import qr from '../images/qr.png';
 import copy from '../images/copy.svg'
+import {Step3} from "./step3";
 // import btc from '../images/btc.svg'
 // import eth from '../images/eth.svg'
 // import arrow from '../images/arrow.svg'
 
 // enum Steps {}
 
-export class Step2 {
+export class Step2 extends Step3{
     // public logoSrc: string = img;
     // public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
     // public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
