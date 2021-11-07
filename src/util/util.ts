@@ -66,11 +66,23 @@ export class WidgetContainer extends Step2 {
         let footerSpan = document.createElement('span')
         let footerImg = document.createElement('img')
         footerImg.setAttribute('src', arrow)
-        footerSpan.innerHTML = 'Продолжить'
-        footer.classList.add('w_blg-step_footer')
-        footer.appendChild(footerSpan)
-        footer.appendChild(footerImg)
-        return footer
+        if(this.stepIndex===1) {
+            footerSpan.innerHTML = 'Продолжить'
+            footer.classList.add('w_blg-step_footer')
+            footer.appendChild(footerSpan)
+            footer.appendChild(footerImg)
+            return footer
+        }
+        else{
+            footerSpan.innerHTML = 'Назад'
+            footer.classList.add('w_blg-step_footer')
+            footerImg.style.transform= 'rotate(180deg)'
+            footerImg.style.marginRight='11px'
+            footerImg.style.marginLeft='0'
+            footer.appendChild(footerImg)
+            footer.appendChild(footerSpan)
+            return footer
+        }
     }
 
     createTitle(): HTMLElement {

@@ -7,7 +7,7 @@ import {Step3} from "./step3";
 
 // enum Steps {}
 
-export class Step2 extends Step3{
+export class Step2{
     // public logoSrc: string = img;
     // public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
     // public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
