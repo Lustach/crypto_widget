@@ -1,7 +1,7 @@
 import {WidgetContainer} from "./util/util";
 import {Fund} from "./util/fund";
 import BVSelect from "./Multiselect/js/bvselect";
-
+import {Select} from "./Multiselect/SelectAPI";
 // импорты css файлов..
 import('./css/style.scss')
 import('./Multiselect/css/bvselect.css')
@@ -33,31 +33,30 @@ namespace MyWidget {
             this.apiInstance = instance;
             this.containerElement = <HTMLElement>document.getElementById(containerId);
         }
-        public initBVSelect(){
-            var demo1 = new BVSelect({
-                selector: "#selectBox",
-                width: "100%",
-                searchbox: true,
-                offset: true,
-                placeholder: "Выбрать другую валюту",
-                search_placeholder: "Введите название валюты",
-                search_autofocus: true,
-                // @ts-ignore
-                breakpoint: 450
-            });
-        }
         /**
          * Инициализация
          */
         public init(): void {
             let widget = new WidgetContainer()
+            // @ts-ignore
+            // console.log(new EventEmitter())
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
-            this.containerElement.append(widget.createStepContainer())
-            this.initBVSelect()
-            let test = new Fund('hui', 'a', 'aa')
-            test.setFundField({varName: 'logoSrc', value: 'huiblyad'})
+            this.containerElement.append(widget.createStepContainer(this.containerElement))
+            new Select().initBVSelect()
+            // this.initBVSelect()
+            // let test = new Fund('hui', 'a', 'aa')
+            // test.setFundField({varName: 'logoSrc', value: 'huiblyad'})
+            // this.eventBus.subscribe('test',()=>{
+            //     console.log('haha1323')
+            // })
         }
+        //
+        // public partInit():void{
+        //     let widget = new WidgetContainer()
+        //     this.containerElement.append(widget.createStepContainer())
+        // }
+
     }
 
     /**
@@ -103,8 +102,4 @@ namespace MyWidget {
 if (typeof (window as any)['myCompanyApi'] === 'undefined') {
     (window as any).myCompanyApi = new MyWidget.Api();
     (window as any).myCompanyApi.runInitCallbacks();
-    // if(window.location.host==='localhost:3000'){
-    //     (window as any).
-    // }
-    // console.log()
 }

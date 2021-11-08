@@ -2,26 +2,31 @@ import img from '../images/fundLogo.png';
 import btc from '../images/btc.svg'
 import eth from '../images/eth.svg'
 import arrow from '../images/arrow.svg'
+import search from '../images/search.svg'
 import Logo from '../images/Logo.svg'
 import {Step2} from "./step2";
 import {Step3} from "./step3";
+import {Select} from "../Multiselect/SelectAPI";
 
+// console.log(MyWidget)
 // enum Steps {}
 
 export class WidgetContainer extends Step2 {
     public logoSrc: string = img;
-    public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
+    public title: string = 'Благотворительный фонд “Помощь людям“'
     public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
     public stepIndex: number = 1
     protected step2 = new Step2()
     protected step3 = new Step3()
-
-    createStepContainer(): HTMLElement {
+    // @ts-ignore
+    public containerElement:HTMLElement
+    createStepContainer(containerElement:HTMLElement): HTMLElement {
+        this.containerElement = containerElement
         let container = document.createElement('div')
         let header = document.createElement('div')
         let logo = document.createElement('img')
         logo.setAttribute('src',Logo)
-        this.stepIndex!==3 ?logo.style.marginBottom='23.57px': logo.style.marginBottom = '62px'
+        this.stepIndex!==3 ?logo.style.marginBottom='19.57px': logo.style.marginBottom = '62px'
         // logo.classList.add('w_blg-logo')
         header.classList.add('w_blg-step_header')
         container.classList.add('w_blg-step_container')
@@ -61,11 +66,30 @@ export class WidgetContainer extends Step2 {
     //     let container = document.createElement('div')
     //     return container
     // }
+    rerenderContainer(){
+        while (this.containerElement.firstChild) {
+            this.containerElement.removeChild(this.containerElement.firstChild)
+        }
+        this.containerElement.append(this.createStepContainer(this.containerElement))
+    }
     createFooter(): HTMLElement {
         let footer = document.createElement('div')
         let footerSpan = document.createElement('span')
         let footerImg = document.createElement('img')
         footerImg.setAttribute('src', arrow)
+        footer.addEventListener('click',()=>{
+            if(this.stepIndex===1) {
+                this.stepIndex = 2
+                this.rerenderContainer()
+            }else if(this.stepIndex===2){
+                this.stepIndex = 1
+                this.rerenderContainer()
+                new Select().initBVSelect()
+            }else if(this.stepIndex===3){
+                this.stepIndex = 2
+                this.rerenderContainer()
+            }
+        })
         if(this.stepIndex===1) {
             footerSpan.innerHTML = 'Продолжить'
             footer.classList.add('w_blg-step_footer')
@@ -139,13 +163,27 @@ export class WidgetContainer extends Step2 {
     }
 
     createCryptoSelect(): HTMLElement {
+        // let searchIcon = document.createElement('img')
+        // searchIcon.setAttribute('src',search)
         let select = document.createElement('select')
         select.setAttribute('id', 'selectBox')
         let option = document.createElement('option')
         option.setAttribute('value', 'value1')
         option.innerHTML = 'Value1'
+        let option1 = document.createElement('option')
+        option1.setAttribute('value', 'value2')
+        option1.innerHTML = 'Value2'
+        let option2 = document.createElement('option')
+        option2.setAttribute('value', 'value3')
+        option2.innerHTML = 'Value3'
+        let option3 = document.createElement('option')
+        option3.setAttribute('value', 'value4')
+        option3.innerHTML = 'Value4'
+        // select.appendChild(searchIcon)
         select.appendChild(option)
-        console.log('haha')
+        select.appendChild(option1)
+        select.appendChild(option2)
+        select.appendChild(option3)
         return select
     }
 }

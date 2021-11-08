@@ -6,7 +6,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "step2";
 @import "step3";
+::-webkit-scrollbar {
+  width: 5px;
+}
 
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  margin-top: 42px !important;
+  margin-bottom: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  scroll-padding: 10px;
+  background-clip: padding-box;
+  border-radius: 5px;
+  background-color: #0F75BD;
+}
 * { // todo нужно сделать специфичность селекторов иначе хуета будет на чужих сайтах
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
@@ -34,7 +49,7 @@ h6, h5 {
         text-align: center;
         letter-spacing: 0.01em;
         color: #031726;
-        margin: 0px 12px;
+        margin: 8px 0 0 12px;
         text-overflow: ellipsis;
         overflow: hidden;
       }
@@ -43,9 +58,9 @@ h6, h5 {
 
   &-title, &-subtitle {
     font-style: normal;
-    font-weight: 600;
-    font-size: 17px;
-    line-height: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
     text-align: center;
     color: #031726;
     margin-bottom: 16px;
@@ -54,6 +69,8 @@ h6, h5 {
 
   &-subtitle {
     margin: 0 0 12px 0;
+    font-size: 16px;
+    line-height: 19.5px;
   }
 
   &-step {
@@ -111,6 +128,12 @@ h6, h5 {
           max-width: 152px;
           width: 100%;
           background-color: white;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 13px;
+          line-height: 30px;
+          text-align: center;
+          color: #031726;
 
           img {
             margin-right: 8px;
