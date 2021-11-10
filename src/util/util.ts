@@ -24,13 +24,16 @@ export class WidgetContainer extends Step2 {
         this.containerElement = containerElement
         let container = document.createElement('div')
         let header = document.createElement('div')
+        let logoContainer = document.createElement('div')
         let logo = document.createElement('img')
+        logoContainer.appendChild(logo)
+        logoContainer.style.display='flex'
         logo.setAttribute('src',Logo)
         this.stepIndex!==3 ?logo.style.marginBottom='19.57px': logo.style.marginBottom = '62px'
         // logo.classList.add('w_blg-logo')
         header.classList.add('w_blg-step_header')
         container.classList.add('w_blg-step_container')
-        container.appendChild(logo)
+        container.appendChild(logoContainer)
         container.appendChild(header)
         if(this.stepIndex!==3) {
             container.appendChild(this.createTitle())
@@ -71,6 +74,11 @@ export class WidgetContainer extends Step2 {
             this.containerElement.removeChild(this.containerElement.firstChild)
         }
         this.containerElement.append(this.createStepContainer(this.containerElement))
+        let test = document.querySelector('.w_blg-fund__header')
+        if(test){
+            console.log(test.children,        test.childNodes
+            )
+        }
     }
     createFooter(): HTMLElement {
         let footer = document.createElement('div')
@@ -153,6 +161,14 @@ export class WidgetContainer extends Step2 {
         btn.appendChild(btnImg)
         btn.appendChild(btnName)
         btn.classList.add('w_blg-step_1_crypto-item')
+        btn.addEventListener('click',()=>{
+            let cryptoBtnList = document.querySelectorAll('.w_blg-step_1_crypto-item--active')
+            console.log(cryptoBtnList)
+            cryptoBtnList.forEach((e)=>{
+                e.classList.remove('w_blg-step_1_crypto-item--active')
+            })
+            btn.classList.add('w_blg-step_1_crypto-item--active')
+        })
         return btn
     }
 

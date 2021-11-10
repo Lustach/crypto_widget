@@ -4,6 +4,7 @@ import BVSelect from "./Multiselect/js/bvselect";
 import {Select} from "./Multiselect/SelectAPI";
 // импорты css файлов..
 import('./css/style.scss')
+/* @ts-ignore */
 import('./Multiselect/css/bvselect.css')
 namespace MyWidget {
     /**
@@ -38,8 +39,6 @@ namespace MyWidget {
          */
         public init(): void {
             let widget = new WidgetContainer()
-            // @ts-ignore
-            // console.log(new EventEmitter())
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
             this.containerElement.append(widget.createStepContainer(this.containerElement))
@@ -67,9 +66,10 @@ namespace MyWidget {
         /**
          * Виджет кнопки
          * @param {string} containerId
+         * @param {string} fundId
          * @return {MyWidget.Widget}
          */
-        public widgetContainer(containerId: string): Widget {
+        public widgetContainer(containerId: string,fundId?: string): Widget {
             const widget = new Widget(this, containerId);
             widget.init();
             return widget;

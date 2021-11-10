@@ -126,21 +126,18 @@ Developed by: Bruno Vieira
 }
 
 .bv_ul_inner {
-    position: absolute;
-    top: 0px;
+    position: absolute !important;
     margin-top: 0px;
     padding: 0;
     display: none;
     border: 2px solid #7BC2F4;
-    /*border-top: none;*/
-    /*border-bottom-left-radius: 6px;*/
-    /*border-bottom-right-radius: 6px;*/
     border-radius: 6px;
-    /*border-radius: 8px;*/
     display: none;
     z-index: 1;
     max-height: 160px;
     overflow-x: auto;
+    top: 0px;
+    bottom: auto !important;
 }
 
 .bv_ul_inner li {

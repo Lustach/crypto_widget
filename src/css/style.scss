@@ -6,21 +6,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "step2";
 @import "step3";
-::-webkit-scrollbar {
-  width: 5px;
-}
+.w_blg-step_container {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
 
-::-webkit-scrollbar-track {
-  border-radius: 5px;
-  margin-top: 42px !important;
-  margin-bottom: 5px !important;
-}
+  ::-webkit-scrollbar-track {
+    border-radius: 5px;
+    margin-top: 42px !important;
+    margin-bottom: 5px !important;
+  }
 
-::-webkit-scrollbar-thumb {
-  scroll-padding: 10px;
-  background-clip: padding-box;
-  border-radius: 5px;
-  background-color: #0F75BD;
+  ::-webkit-scrollbar-thumb {
+    scroll-padding: 10px;
+    background-clip: padding-box;
+    border-radius: 5px;
+    background-color: #0F75BD;
+  }
 }
 * { // todo нужно сделать специфичность селекторов иначе хуета будет на чужих сайтах
   box-sizing: border-box;
@@ -38,6 +40,13 @@ h6, h5 {
   &-fund {
     &__header {
       display: flex;
+
+      img {
+        width: 98px;
+        height: 57px;
+        border-radius: 5px;
+        object-fit: contain;
+      }
 
       h6 {
         //width: 204px;
@@ -96,6 +105,7 @@ h6, h5 {
         align-self: stretch;
         flex-grow: 0;
         margin: 8px 0px;
+        text-align: start;
       }
 
       &_crypto {
@@ -107,6 +117,7 @@ h6, h5 {
         }
 
         &-item {
+
           cursor: pointer;
           //&:hover{
           //  background-color: #73b7ff;
@@ -134,6 +145,15 @@ h6, h5 {
           line-height: 30px;
           text-align: center;
           color: #031726;
+
+          &:hover:not(&--active) {
+            background-color: #e0f1ff;
+
+          }
+
+          &--active {
+            background-color: #c0e3ff;
+          }
 
           img {
             margin-right: 8px;

@@ -1,18 +1,6 @@
 import qr from '../images/qr.png';
 import copy from '../images/copy.svg'
-import {Step3} from "./step3";
-// import btc from '../images/btc.svg'
-// import eth from '../images/eth.svg'
-// import arrow from '../images/arrow.svg'
-
-// enum Steps {}
-
 export class Step2{
-    // public logoSrc: string = img;
-    // public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
-    // public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
-    // public stepIndex: number = 2
-
     createSubTitle(): HTMLElement {
         let container = document.createElement('div')
         container.classList.add('w_blg-step_2__subtitle')
@@ -28,7 +16,7 @@ export class Step2{
         container.classList.add('w_blg-step_2__qr_container')
         return container
     }
-    //
+
     createInput(labelName:string,inputValue?:string|number):HTMLElement{
         let container = document.createElement('div')
         let input = document.createElement('input')
