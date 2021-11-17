@@ -23,6 +23,7 @@ Developed by: Bruno Vieira
 }
 
 .bv_atual {
+    cursor: pointer;
     /*padding: 10px;*/
     padding: 8px 12px 8px 12px;
     height: 40px;
@@ -41,14 +42,41 @@ Developed by: Bruno Vieira
     justify-content: space-between;
 }
 
-/*.bv_atual:before{*/
-/*    content: '';*/
-/*    background-image: url("/src/images/fundLogo.png");*/
-/*    background-repeat: no-repeat;*/
-/*    width: 10px;*/
-/*    height: 20px;*/
+.bv_atual:before{
+    content: '';
+    /*background-image: url("/src/images/arrow.svg");*/
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 20px;
+}
+.bv_atual span{
+    margin-right: 74px;
+}
+.bv_atual img{
+    position: absolute;
+}
+.bv_atual-selected__item{
+    display: flex;
+    align-items: center;
+    /*max-width: 30px; !* Change to fit your images *!*/
+    /*width: 30px;*/
+    /*height: 30px !important;*/
+    /*object-fit: contain;*/
+}
+.bv_atual-selected__item img{
+    position: relative;
+    max-width: 30px; /* Change to fit your images */
+    width: 30px;
+    height: 30px !important;
+    object-fit: contain;
+}
+/*.bv_atual_item__img{*/
+/*    max-width: 30px; !* Change to fit your images *!*/
+/*    width:30px;*/
+/*    height: 30px !important;*/
+/*    object-fit: contain;*/
+/*    margin-left: 26%;*/
 /*}*/
-
 .down {
     margin-top: -5px !important;
 }
@@ -149,7 +177,6 @@ Developed by: Bruno Vieira
     font-size: 10pt;
     padding: 12px 28px 10px 10px;
 }
-
 .bv_ul_inner i {
     color: #464646;
     font-size: 17pt;
@@ -165,6 +192,9 @@ Developed by: Bruno Vieira
     position: relative;
     bottom: 6px;
     max-width: 30px; /* Change to fit your images */
+    width:30px;
+    height: 30px !important;
+    object-fit: contain;
 }
 
 .bv_ul_inner li input {

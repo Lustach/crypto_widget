@@ -2,6 +2,8 @@ import {WidgetContainer} from "./util/util";
 import {Fund} from "./util/fund";
 import BVSelect from "./Multiselect/js/bvselect";
 import {Select} from "./Multiselect/SelectAPI";
+import {API as API} from "./plugins/axios";
+import {fundData} from './util/fundData'
 // импорты css файлов..
 import('./css/style.scss')
 /* @ts-ignore */
@@ -19,7 +21,12 @@ namespace MyWidget {
          * DOM элемент контейнера
          */
         protected containerElement: HTMLElement;
+        /*
+        * Айди фонда для запросов
+        * */
+        protected fundId: string;
 
+        protected isWidgetPreview: boolean;
         /**
          * Инстанс api
          */
@@ -29,18 +36,28 @@ namespace MyWidget {
          * Constructor
          * @param {Api} instance
          * @param {string} containerId
+         * @param fundId
+         * @param isWidgetPreview
          */
-        public constructor(instance: Api, containerId: string) {
+        public constructor(instance: Api, containerId: string,fundId: string,isWidgetPreview:boolean) {
             this.apiInstance = instance;
             this.containerElement = <HTMLElement>document.getElementById(containerId);
+            this.fundId = fundId
+            this.isWidgetPreview = isWidgetPreview
         }
         /**
          * Инициализация
          */
-        public init(): void {
+        public async init(): Promise<void> {
             let widget = new WidgetContainer()
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
+            fundData.fund = (await API.getCryptoWidget('1')).data
+            // fundData.cryptoList = (await API.getCryptoList()).data
+            if(this.isWidgetPreview){
+                fundData.fund.isWidgetPreview = this.isWidgetPreview
+            }
+            console.log(fundData)
             this.containerElement.append(widget.createStepContainer(this.containerElement))
             new Select().initBVSelect()
             // this.initBVSelect()
@@ -67,11 +84,12 @@ namespace MyWidget {
          * Виджет кнопки
          * @param {string} containerId
          * @param {string} fundId
+         * @param isWidgetPreview
          * @return {MyWidget.Widget}
          */
-        public widgetContainer(containerId: string,fundId?: string): Widget {
-            const widget = new Widget(this, containerId);
-            widget.init();
+        public async widgetContainer(containerId: string,fundId: string,isWidgetPreview: boolean): Promise<Widget> {
+            const widget = new Widget(this, containerId,fundId,isWidgetPreview);
+            await widget.init();
             return widget;
         }
 

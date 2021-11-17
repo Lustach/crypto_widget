@@ -11,8 +11,7 @@ export class Select{
             placeholder: "Выбрать другую валюту",
             search_placeholder: "Введите название валюты",
             search_autofocus: true,
-            // @ts-ignore
-            breakpoint: 450
+            breakpoint: 450,
         });
     }
 }

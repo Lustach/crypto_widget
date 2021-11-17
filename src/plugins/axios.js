@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {fundData} from "../util/fundData";
 
 export const API = {
     // fill_profile: {
@@ -12,7 +13,8 @@ export const API = {
     //     }
     // }),
     // }
+    getCryptoWidget: (id) => axios.get(`/crypto_widget/${id}/`),
 }
 
-axios.defaults.baseURL = process.env.VUE_APP_BACKEND_HOST
+axios.defaults.baseURL = fundData.BACKEND_HOST
 axios.defaults.headers.common['Content-Type'] = 'application/json';
