@@ -1,21 +1,14 @@
 "use strict";
-exports.__esModule = true;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Step2 = void 0;
-/* @ts-ignore */
-var qr_png_1 = require("../images/qr.png");
-/* @ts-ignore */
-var copy_svg_1 = require("../images/copy.svg");
-// import btc from '../images/btc.svg'
-// import eth from '../images/eth.svg'
-// import arrow from '../images/arrow.svg'
-// enum Steps {}
+var qr_png_1 = __importDefault(require("../images/qr.png"));
+var copy_svg_1 = __importDefault(require("../images/copy.svg"));
 var Step2 = /** @class */ (function () {
     function Step2() {
     }
-    // public logoSrc: string = img;
-    // public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
-    // public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
-    // public stepIndex: number = 2
     Step2.prototype.createSubTitle = function () {
         var container = document.createElement('div');
         container.classList.add('w_blg-step_2__subtitle');
@@ -25,12 +18,11 @@ var Step2 = /** @class */ (function () {
     Step2.prototype.createQr = function () {
         var container = document.createElement('div');
         var img = document.createElement('img');
-        img.setAttribute('src', qr_png_1["default"]);
+        img.setAttribute('src', qr_png_1.default);
         container.appendChild(img);
         container.classList.add('w_blg-step_2__qr_container');
         return container;
     };
-    //
     Step2.prototype.createInput = function (labelName, inputValue) {
         var container = document.createElement('div');
         var input = document.createElement('input');
@@ -44,7 +36,7 @@ var Step2 = /** @class */ (function () {
                 console.error('Async: Could not copy text: ', err);
             });
         });
-        icon.setAttribute('src', copy_svg_1["default"]);
+        icon.setAttribute('src', copy_svg_1.default);
         container.classList.add('w_blg-step_2__input-container');
         label.innerHTML = labelName;
         container.appendChild(label);

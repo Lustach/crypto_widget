@@ -1,5 +1,6 @@
 import {EventBus} from "../customEvents/eventBus";
 import {eventBus} from "../customEvents/eventBus";
+
 export let fundData = {
     fund: {
         logo: '',
@@ -7,34 +8,28 @@ export let fundData = {
         short_description: '',
         status: '',
         isWidgetPreview: false,
+        id: '',
     },
     selectedCrypto: {
-
+        fullName: '',
     },
-    cryptoList: [
-        {
-            "name": "doge",
-            "fullName": "Dogecoin",
-            "extraIdName": null,
-            "image": "https://changehero.io/static/images/coins/doge.svg"
-        },
-        {
-            "name": "pax",
-            "fullName": "Paxos Standard Token",
-            "extraIdName": null,
-            "image": "https://changehero.io/static/images/coins/pax.svg"
-        },
-        {
-            "name": "rep",
-            "fullName": "Augur",
-            "extraIdName": null,
-            "image": "https://changehero.io/static/images/coins/rep.svg"
-        }
-    ],
+    selectedCryptoKey: '',
+    cryptoList: {
+        btc:{},
+        bch:{},
+        bsv:{},
+    },
+    fromCryptoForm: {
+        payoutAddress: '',
+        cryptoFrom: '',
+    },
+    transactionInfo:{
+        min_amount_from: 0,
+        payin_address: '',
+        refund_address: '',
+        payin_address_qr: '',
+        payin_extra_id: '',//memo
+    },
     BACKEND_HOST: 'http://localhost:8000',
-
+//http://172.10.1.10:9876
 }
-setTimeout(()=>{
-    eventBus.emit('event-name', 'Hello'); // => Hello Hello
-    eventBus.emit('event-name', 'World'); // => World
-},3000)

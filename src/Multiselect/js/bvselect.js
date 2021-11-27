@@ -1,5 +1,7 @@
 import {fundData} from '../../util/fundData'
+import {eventBus} from "../../customEvents/eventBus";
 // import {customEvent}from '../../customEvents/index'
+import altImg from '../../images/coin-svgrepo-com.svg'
 
 export default class BVSelect {
 
@@ -11,9 +13,21 @@ export default class BVSelect {
         offset = true,
         search_placeholder = "Search...",
         placeholder = "Select Option",
-        breakpoint = "600"
+        breakpoint = "600",
+        selectEvent = 'select',
+        unSelect = 'unselect',
+        altImg = '../images/coin-svgrepo-com.svg'
     }) {
-
+        eventBus.on(unSelect, () => {
+            // todo вот тут ошибка(не влияет на работоспособность) при выборе валюты на первом шаге -> перключение на 2 шаг -> опять на первый -> попытка выбора и
+            //  перевыбора и какая-то красная хуйня
+            //  в консоли ( походу сохраняется старый айдишник, но как???? с условием ниже будет окей
+            console.log(randomID)
+            if (document.getElementById("main_" + randomID)) {
+                document.getElementById("main_" + randomID).innerHTML = `<span>${first_option_text}</span>` + "<i id='arrow_" + randomID + "' class='arrows_bv arrow" +
+                    " down'></i>";
+            }
+        })
         // Random Number generated
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
         var SearchPlaceholder = search_placeholder;
@@ -37,18 +51,19 @@ export default class BVSelect {
         // Hides native selector
         document.getElementById(this.selector).style.display = "none";
 
-        // ** ADD OPTIONS TO LIST ** 
+        // ** ADD OPTIONS TO LIST **
         this.SetupListOptions = function () {
             // Get All options inside Selectbox
             var x = document.getElementById(this.selector);
             for (var i = 0; i < x.length; i++) {
 
                 var optionText = x[i].text;
-                var optionValue = x[i].value;
                 var optionDisabled = x[i].disabled;
                 var optionSeparator = x[i].getAttribute("data-separator");
                 var optionImg = x[i].getAttribute("data-img");
                 var optionIcon = x[i].getAttribute("data-icon");
+                // todo это конкретно для криптолиста
+                // var optionKey = x[i].getAttribute("data-key");
 
                 // Option Disabled
                 if (optionDisabled == true) {
@@ -62,7 +77,7 @@ export default class BVSelect {
                 } else {
                     var is_separator = "";
                 }
-                // Check for Attachment  
+                // Check for Attachment
                 if (optionImg) {
                     var has_attachment = "<img src=" + optionImg + ">";
                 } else {
@@ -74,7 +89,7 @@ export default class BVSelect {
                 }
 
                 // Append
-                document.getElementById("ul_" + randomID).insertAdjacentHTML('beforeend', "<li class='" + is_disabled + " " + is_separator + "'  > " + has_attachment + " " + optionText + "</li>");
+                document.getElementById("ul_" + randomID).insertAdjacentHTML('beforeend', "<li class='" + is_disabled + " " + is_separator + "'  > " + has_attachment + " " + `<span>${optionText}</span>` + "</li>");
             }
 
             document.querySelectorAll('#ul_' + randomID + ' li').forEach((item) => {
@@ -102,7 +117,7 @@ export default class BVSelect {
                             } else {
                                 selectedMultiple.push(index);
                                 item.style.backgroundColor = "#ececec";
-                            } // Adds to array 
+                            } // Adds to array
 
                             // Check if array is empty, if it is, gets the first option
                             if (selectedMultiple.length == 0) {
@@ -132,10 +147,10 @@ export default class BVSelect {
                             let itemImg = item.querySelector('img').getAttribute('src')
                             console.log(itemImg, 'huhaihuoahuoah')
                             // Updates main div
-                            document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>"+`<img alt="" class="bv_atual_item__img" src=${itemImg}>`+`<span class="bv_atual_item__text" style="margin-right: 0;">${item.textContent}</span>` + "</div>" + "<i" +
-                                " id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>";
+                            document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` + `<span class="bv_atual_item__text" style="margin-right: 0;">${item.textContent}</span>` + "</div>" +
+                                `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
                             document.getElementById("ul_" + randomID).style.display = "none";
-
+                            eventBus.emit(selectEvent, {textContent: item.textContent})
                             // Remove class so Body has Scroll Again
                             document.body.classList.remove("stop-scrolling");
                             if (document.body.contains(document.getElementById('deletebg'))) {
@@ -405,7 +420,7 @@ export default class BVSelect {
         }, true);
     }
 
-    // ** METHODS ** 
+    // ** METHODS **
     // DESTROY
     Destroy() {
         // Destroy main element and shows up native selectbox
@@ -415,7 +430,7 @@ export default class BVSelect {
 
     // UPDATE
     Update() {
-        // Removes all Li that does not contain class "nofocus" - Its the search. 
+        // Removes all Li that does not contain class "nofocus" - Its the search.
         Array.from(document.querySelectorAll("#ul_" + this.randomID + " li"))
         .forEach(function (val) {
             if (!val.classList.contains("nofocus")) {
@@ -519,4 +534,6 @@ export default class BVSelect {
         }
     }
 }
+
+
 // module.exports = BVSelect

@@ -1,25 +1,27 @@
 import qr from '../images/qr.png';
 import copy from '../images/copy.svg'
+import {fundData} from "./fundData";
 export class Step2{
     createSubTitle(): HTMLElement {
         let container = document.createElement('div')
         container.classList.add('w_blg-step_2__subtitle')
-        container.innerHTML = 'Отправьте <span class="w_blg-step_2_ltc">LTC*</span> на адрес фонда в течение <span class="w_blg-step_2_timer">ХХ секунд</span>'
+        container.innerHTML = `Отправьте <span class="w_blg-step_2_ltc">${fundData.fromCryptoForm.cryptoFrom.toUpperCase()}*</span> на адрес фонда`
         return container
     }
 
-    createQr():HTMLElement{
+    createQr(imgSrc:string):HTMLElement{
         let container = document.createElement('div')
         let img = document.createElement('img')
-        img.setAttribute('src',qr)
+        img.setAttribute('src',imgSrc || qr)
         container.appendChild(img)
         container.classList.add('w_blg-step_2__qr_container')
         return container
     }
 
-    createInput(labelName:string,inputValue?:string|number):HTMLElement{
+    createInput(labelName:string,inputValue:string):HTMLElement{
         let container = document.createElement('div')
         let input = document.createElement('input')
+        input.value=inputValue
         let label = document.createElement('label')
         let icon = document.createElement('img')
         icon.addEventListener('click',()=>{
@@ -41,7 +43,7 @@ export class Step2{
     createInscription():HTMLElement{
         let container = document.createElement('p')
         container.classList.add('w_blg-step_2__inscription')
-        container.innerHTML='*Минимальная сумма: ХX LTC'
+        container.innerHTML=`*Минимальная сумма: ${fundData.transactionInfo.min_amount_from} ${fundData.fromCryptoForm.cryptoFrom}`
         return container
     }
 }

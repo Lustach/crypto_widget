@@ -42,34 +42,44 @@ Developed by: Bruno Vieira
     justify-content: space-between;
 }
 
-.bv_atual:before{
-    content: '';
-    /*background-image: url("/src/images/arrow.svg");*/
-    background-repeat: no-repeat;
-    width: 10px;
-    height: 20px;
+.bv_atual:before {
+    /*content: '';*/
+    /*!*background-image: url("/src/images/arrow.svg");*!*/
+    /*background-repeat: no-repeat;*/
+    /*width: 10px;*/
+    /*height: 20px;*/
 }
-.bv_atual span{
-    margin-right: 74px;
+
+.bv_atual > span {
+    margin-left: 27px;
 }
-.bv_atual img{
+
+.bv_atual img {
     position: absolute;
 }
-.bv_atual-selected__item{
+
+/*#bv_atual-search__icon{*/
+/*    */
+/*}*/
+.bv_atual-selected__item {
     display: flex;
     align-items: center;
+    width: 100%;
+    margin-left: -3px;
     /*max-width: 30px; !* Change to fit your images *!*/
     /*width: 30px;*/
     /*height: 30px !important;*/
     /*object-fit: contain;*/
 }
-.bv_atual-selected__item img{
+
+.bv_atual-selected__item img {
     position: relative;
     max-width: 30px; /* Change to fit your images */
     width: 30px;
     height: 30px !important;
     object-fit: contain;
 }
+
 /*.bv_atual_item__img{*/
 /*    max-width: 30px; !* Change to fit your images *!*/
 /*    width:30px;*/
@@ -176,6 +186,12 @@ Developed by: Bruno Vieira
     font-family: arial;
     font-size: 10pt;
     padding: 12px 28px 10px 10px;
+
+    display: flex;
+    height: 38px;
+}
+.bv_ul_inner li:first-child{
+    display: block;
 }
 .bv_ul_inner i {
     color: #464646;
@@ -192,7 +208,7 @@ Developed by: Bruno Vieira
     position: relative;
     bottom: 6px;
     max-width: 30px; /* Change to fit your images */
-    width:30px;
+    width: 30px;
     height: 30px !important;
     object-fit: contain;
 }

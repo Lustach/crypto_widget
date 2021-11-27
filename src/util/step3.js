@@ -1,19 +1,13 @@
 "use strict";
-exports.__esModule = true;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Step3 = void 0;
-/* @ts-ignore */
-var Heart_png_1 = require("../images/Heart.png");
-// import btc from '../images/btc.svg'
-// import eth from '../images/eth.svg'
-// import arrow from '../images/arrow.svg'
-// enum Steps {}
+var Heart_png_1 = __importDefault(require("../images/Heart.png"));
 var Step3 = /** @class */ (function () {
     function Step3() {
     }
-    // public logoSrc: string = img;
-    // public title: string = 'Благотворительный фонд “Помощь людям f f f f f f ff ffff  f f f“'
-    // public description: string = 'Фонд помогает детям-сиротам и детям из неблагополучных семей в Санкт-Петербурге. Все собранные средства пойдут на закупку одежды и подарков детям на праздники.'
-    // public stepIndex: number = 2
     Step3.prototype.createTitle = function () {
         var container = document.createElement('p');
         container.classList.add('w_blg-step_3__inscription');
@@ -25,7 +19,7 @@ var Step3 = /** @class */ (function () {
         var img = document.createElement('img');
         container.classList.add('w_blg-step_3__img-container');
         img.classList.add('w_blg-step_3__img');
-        img.setAttribute('src', Heart_png_1["default"]);
+        img.setAttribute('src', Heart_png_1.default);
         container.appendChild(img);
         return container;
     };

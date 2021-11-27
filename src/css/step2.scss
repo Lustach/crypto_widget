@@ -12,9 +12,8 @@
         text-align: left;
       }
       &__subtitle{
-        width: 270px;
+        //width: 270px;
         margin: 0 auto;
-        height: 40px;
         left: 16px;
         top: 218px;
         font-style: normal;
@@ -44,6 +43,7 @@
             line-height: 17px;
             color: #031726;
             margin-bottom: 6px;
+            text-align: left;
           }
           input{
             display: flex;
@@ -78,6 +78,9 @@
         justify-content: center;
         align-items: center;
         margin: 16px 0;
+        img{
+          width: 115px;
+        }
       }
     }
   }

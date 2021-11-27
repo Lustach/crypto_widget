@@ -12,6 +12,9 @@ export class Select{
             search_placeholder: "Введите название валюты",
             search_autofocus: true,
             breakpoint: 450,
+            // названия ивентов для шины
+            selectEvent: 'select',
+            unSelect:'unselect',
         });
     }
 }

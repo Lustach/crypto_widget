@@ -14,6 +14,9 @@ export const API = {
     // }),
     // }
     getCryptoWidget: (id) => axios.get(`/crypto_widget/${id}/`),
+    getCryptoList:()=>axios.get('/currency/'),
+    createTransaction: (data)=>axios.post('crypto_transaction/',{...data})
+    // qQpB2Kv1z8QnKXPo5Th7
 }
 
 axios.defaults.baseURL = fundData.BACKEND_HOST

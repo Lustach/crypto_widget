@@ -10,16 +10,10 @@ import {Select} from "../Multiselect/SelectAPI";
 import {fundData} from './fundData'
 // import {EventBus} from "../customEvents/eventBus";
 import {eventBus} from "../customEvents/eventBus";
+import {API as API} from "../plugins/axios";
+
 // const eventBus = new EventBus();
-// console.log(eventBus,'HUAUDUFOASUDO')
-// @ts-ignore
-eventBus.on('event-name', ({ detail }) => {
-    console.warn(detail,'2HUYA');
-});
-// @ts-ignore
-eventBus.once('event-name', ({ detail }) => {
-    console.warn(detail,'2HUYA');
-});
+
 export class WidgetContainer extends Step2 {
     public logoSrc: string = img;
     public title: string = 'Благотворительный фонд “Помощь людям“'
@@ -27,12 +21,16 @@ export class WidgetContainer extends Step2 {
     public stepIndex: number = 1
     protected step2 = new Step2()
     protected step3 = new Step3()
+    public step1: HTMLElement = document.createElement('div')
+    // public step2: HTMLElement = document.createElement('div')
+
     // @ts-ignore
     public containerElement: HTMLElement
 
     createStepContainer(containerElement: HTMLElement): HTMLElement {
         this.containerElement = containerElement
         let container = document.createElement('div')
+        this.step1.classList.add('step1')
         let header = document.createElement('div')
         let logoContainer = document.createElement('div')
         let logo = document.createElement('img')
@@ -54,15 +52,20 @@ export class WidgetContainer extends Step2 {
             let cryptoBtnContainer = this.createCryptoBtnContainer()
             cryptoBtnContainer.appendChild(this.createCryptoBtn(btc, 'Bitcoin'))
             cryptoBtnContainer.appendChild(this.createCryptoBtn(eth, 'Ethereum'))
-            container.appendChild(cryptoBtnContainer)
-            container.appendChild(this.createCryptoSelect())
+            if (!this.step1.children.length) {
+                console.error('error')
+                this.step1.appendChild(cryptoBtnContainer)
+                this.step1.appendChild(this.createCryptoSelect())
+            }
+            container.appendChild(this.step1)
+            console.log(this.step1)
         } else if (this.stepIndex === 2) {
             container.appendChild(this.step2.createSubTitle())
-            container.appendChild(this.createQr())
+            container.appendChild(this.createQr(fundData.transactionInfo.payin_address_qr))
             let inputContainer = document.createElement('div')
             inputContainer.classList.add('w_blg-step_2__inputs-container')
-            inputContainer.appendChild(this.createInput('Адрес кошелька'))
-            inputContainer.appendChild(this.createInput('MEMO'))
+            inputContainer.appendChild(this.createInput('Адрес кошелька', fundData.transactionInfo.payin_address))
+            inputContainer.appendChild(this.createInput('MEMO', fundData.transactionInfo.payin_extra_id))
             container.appendChild(inputContainer)
             container.appendChild(this.createInscription())
             // console.log(this.step2)
@@ -71,7 +74,35 @@ export class WidgetContainer extends Step2 {
             container.appendChild(this.step3.createImg())
         }
         container.appendChild(this.createFooter())
+        if (this.stepIndex === 2) {
+            container.appendChild(this.createBtnReady())
+        }
         return container
+    }
+
+    createBtnReady(): HTMLElement {
+        let footerBtnReady = document.createElement('div')
+        let footerBtnReadySpan = document.createElement('span')
+        footerBtnReady.classList.add('w_blg-step_footer')
+        footerBtnReadySpan.innerHTML = 'Готово'
+        footerBtnReady.appendChild(footerBtnReadySpan)
+        footerBtnReady.style.maxWidth = '179px'
+        footerBtnReady.style.right = '0'
+        footerBtnReady.style.left = 'auto'
+        footerBtnReady.style.borderRadius = '0px 0px 5px 0px'
+        footerBtnReady.addEventListener('click', () => {
+            this.stepIndex = 3
+            this.rerenderContainer()
+
+        })
+        return footerBtnReady
+        // footer.classList.add('w_blg-step_footer')
+        // footerImg.style.transform = 'rotate(180deg)'
+        // footerImg.style.marginRight = '11px'
+        // footerImg.style.marginLeft = '0'
+        // footer.style.maxWidth='179px'
+        // footer.appendChild(footerImg)
+        // footer.appendChild(footerSpan)
     }
 
     rerenderContainer() {
@@ -86,23 +117,37 @@ export class WidgetContainer extends Step2 {
         }
     }
 
-    createFooter(): HTMLElement {
+    async createTransaction() {
+        let data = {
+            currency_from: fundData.selectedCryptoKey,
+            currency_to: fundData.fromCryptoForm.cryptoFrom,
+            payout_address: fundData.fromCryptoForm.payoutAddress,
+            crypto_widget: fundData.fund.id
+        }
+        console.log(fundData, '127')
+        const result = await API.createTransaction(data)
+        fundData.transactionInfo = result.data
+        console.log(fundData.transactionInfo)
+    }
+
+    createFooter(): HTMLDivElement {
         let selectedItemFullName = document.querySelector('.bv_atual_item__text')?.textContent?.trim()
-        fundData.selectedCrypto = fundData.cryptoList.filter(e => e.fullName === selectedItemFullName)
         let footer = document.createElement('div')
         let footerSpan = document.createElement('span')
         let footerImg = document.createElement('img')
         footerImg.setAttribute('src', arrow)
         if (!fundData.fund.isWidgetPreview) {
-            console.log(fundData.fund.isWidgetPreview, 'suka')
-            footer.addEventListener('click', () => {
+            footer.addEventListener('click', async () => {
                 if (this.stepIndex === 1) {
                     this.stepIndex = 2
+                    await this.createTransaction()
                     this.rerenderContainer()
                 } else if (this.stepIndex === 2) {
                     this.stepIndex = 1
                     this.rerenderContainer()
-                    new Select().initBVSelect()
+                    // if (!this.step1.children.length) {
+                    //     new Select().initBVSelect()
+                    // }
                 } else if (this.stepIndex === 3) {
                     this.stepIndex = 2
                     this.rerenderContainer()
@@ -116,13 +161,23 @@ export class WidgetContainer extends Step2 {
             footer.appendChild(footerImg)
             return footer
         } else {
+            // let footerBtnReady = document.createElement('div')
+            // footerBtnReady.classList.add('w_blg-step_footer')
+            // footerBtnReady.innerHTML = 'Назад'
             footerSpan.innerHTML = 'Назад'
             footer.classList.add('w_blg-step_footer')
             footerImg.style.transform = 'rotate(180deg)'
             footerImg.style.marginRight = '11px'
             footerImg.style.marginLeft = '0'
+            if (this.stepIndex !== 3) {
+                footer.style.maxWidth = '179px'
+            }
+            if (this.stepIndex === 2) {
+                footer.style.borderRadius = '0px 0px 0px 5px'
+            }
             footer.appendChild(footerImg)
             footer.appendChild(footerSpan)
+
             return footer
         }
     }
@@ -174,22 +229,33 @@ export class WidgetContainer extends Step2 {
         btn.classList.add('w_blg-step_1_crypto-item')
         if (!fundData.fund.isWidgetPreview) {
             btn.addEventListener('click', () => {
-                let cryptoBtnList = document.querySelectorAll('.w_blg-step_1_crypto-item--active')
-                cryptoBtnList.forEach((e) => {
-                    e.classList.remove('w_blg-step_1_crypto-item--active')
-                })
+                if (!document.querySelector('#bv_atual-search__icon')) {
+                    this.unSelect()
+                    this.createSearchIconToSelect()
+                }
+                this.setCryptoBtnListUnActive()
                 btn.classList.add('w_blg-step_1_crypto-item--active')
-                // this.toggleSelectDisable()
             })
         }
         return btn
     }
 
-    toggleSelectDisable() {
-        let select = document.querySelector('.bv_atual')
-        console.log(select, 'WARN')
-        select?.classList.add('bv_atual--disabled')
+    setCryptoBtnListUnActive() {
+        let cryptoBtnList = document.querySelectorAll('.w_blg-step_1_crypto-item--active')
+        cryptoBtnList.forEach((e) => {
+            e.classList.remove('w_blg-step_1_crypto-item--active')
+        })
     }
+
+    unSelect() {
+        eventBus.emit('unselect', null)
+    }
+
+    // toggleSelectDisable() {
+    //     let select = document.querySelector('.bv_atual')
+    //     console.log(select, 'WARN')
+    //     select?.classList.add('bv_atual--disabled')
+    // }
 
     createCryptoBtnContainer(): HTMLElement {
         let container = document.createElement('div')
@@ -197,15 +263,19 @@ export class WidgetContainer extends Step2 {
         return container
     }
 
-    createCryptoSelect(): HTMLElement {
+    createSearchIconToSelect() {
         setTimeout(() => {
             let searchIcon = document.createElement('img')
             searchIcon.setAttribute('src', search)
+            searchIcon.setAttribute('id', 'bv_atual-search__icon')
             let selectRendered = document.querySelector('.bv_atual')
             // @ts-ignore
             selectRendered.appendChild(searchIcon)
-            // console.log(document.querySelector('.bv_atual'),'hui')
         })
+    }
+
+    createCryptoSelect(): HTMLElement {
+        this.createSearchIconToSelect()
 
         let select = document.createElement('select')
         select.setAttribute('id', 'selectBox')
@@ -227,8 +297,13 @@ export class WidgetContainer extends Step2 {
         // select.appendChild(option2)
         // select.appendChild(option3)
         // fundData.cryptoList
-        for (const listItem of fundData.cryptoList) {
-            select.appendChild(this.createSelectOption(listItem.name, listItem.image, listItem.fullName))
+        console.log(fundData.cryptoList, 'SAASD')
+        for (const listItem in fundData.cryptoList) {
+            // @ts-ignore
+            let item = fundData.cryptoList[listItem]
+            select.appendChild(this.createSelectOption(listItem, item.image, item.fullName))
+            // console.log(listItem)
+            // select.appendChild(this.createSelectOption(listItem.name, listItem.image, listItem.fullName))
         }
         // select.appendChild(this.createSelectOption('value1', 'https://img.icons8.com/color/2x/usa.png', 'Value1'))
 
@@ -239,11 +314,28 @@ export class WidgetContainer extends Step2 {
         let option = document.createElement('option')
         option.setAttribute('value', value)
         option.setAttribute('data-img', img)
+        option.setAttribute('data-key', value)
         option.innerHTML = innerHtml
         return option
         // return
     }
 }
 
+let widgetContainer = new WidgetContainer()
+eventBus.on('select', (item) => {
+    widgetContainer.setCryptoBtnListUnActive()
+    console.log(item)
+    // @ts-ignore
+    fundData.selectedCrypto = fundData.cryptoList[item.detail.key]
+    // fundData.selectedCryptoKey =
+    for (const key in fundData.cryptoList) {
+        // @ts-ignore
+        if (fundData.cryptoList[key].fullName === item.detail.textContent.trim())
+            fundData.selectedCryptoKey = key
+    }
+    // fundData.selectedCrypto = fundData.cryptoList.filter(e => e.fullName === itemTextContent.detail.trim())
+    // @ts-ignore
+    console.log(fundData.cryptoList[item.detail.key], item, 'haha')
+})
 // eventBus.emit('event-name', 'Hello'); // => Hello Hello
 // eventBus.emit('event-name', 'World'); // => World

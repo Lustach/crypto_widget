@@ -27,6 +27,8 @@ namespace MyWidget {
         protected fundId: string;
 
         protected isWidgetPreview: boolean;
+        protected payoutAddress: string;
+        protected cryptoFrom: string;
         /**
          * Инстанс api
          */
@@ -38,13 +40,18 @@ namespace MyWidget {
          * @param {string} containerId
          * @param fundId
          * @param isWidgetPreview
+         * @param payoutAddress
+         * @param cryptoFrom
          */
-        public constructor(instance: Api, containerId: string,fundId: string,isWidgetPreview:boolean) {
+        public constructor(instance: Api, containerId: string, fundId: string, isWidgetPreview: boolean, payoutAddress: string, cryptoFrom: string) {
             this.apiInstance = instance;
             this.containerElement = <HTMLElement>document.getElementById(containerId);
             this.fundId = fundId
             this.isWidgetPreview = isWidgetPreview
+            this.cryptoFrom = cryptoFrom
+            this.payoutAddress = payoutAddress
         }
+
         /**
          * Инициализация
          */
@@ -53,8 +60,17 @@ namespace MyWidget {
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
             fundData.fund = (await API.getCryptoWidget('1')).data
-            // fundData.cryptoList = (await API.getCryptoList()).data
-            if(this.isWidgetPreview){
+            fundData.fund.id = this.fundId
+            fundData.cryptoList = (await API.getCryptoList()).data
+            for (const key of ['btc','bch','bsv','eth']) {
+                // @ts-ignore
+                delete fundData.cryptoList[key]
+            }
+            fundData.fromCryptoForm = {
+                cryptoFrom: this.cryptoFrom,
+                payoutAddress: this.payoutAddress
+            }
+            if (this.isWidgetPreview) {
                 fundData.fund.isWidgetPreview = this.isWidgetPreview
             }
             console.log(fundData)
@@ -67,6 +83,7 @@ namespace MyWidget {
             //     console.log('haha1323')
             // })
         }
+
         //
         // public partInit():void{
         //     let widget = new WidgetContainer()
@@ -85,10 +102,12 @@ namespace MyWidget {
          * @param {string} containerId
          * @param {string} fundId
          * @param isWidgetPreview
+         * @param payoutAddress
+         * @param cryptoFrom
          * @return {MyWidget.Widget}
          */
-        public async widgetContainer(containerId: string,fundId: string,isWidgetPreview: boolean): Promise<Widget> {
-            const widget = new Widget(this, containerId,fundId,isWidgetPreview);
+        public async widgetContainer(containerId: string, fundId: string, isWidgetPreview: boolean, payoutAddress: string, cryptoFrom: string): Promise<Widget> {
+            const widget = new Widget(this, containerId, fundId, isWidgetPreview, payoutAddress, cryptoFrom);
             await widget.init();
             return widget;
         }
