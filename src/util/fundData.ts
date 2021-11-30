@@ -14,22 +14,24 @@ export let fundData = {
         fullName: '',
     },
     selectedCryptoKey: '',
+    hideCryptoList: {},
     cryptoList: {
-        btc:{},
-        bch:{},
-        bsv:{},
+        btc: {},
+        bch: {},
+        bsv: {},
     },
     fromCryptoForm: {
         payoutAddress: '',
         cryptoFrom: '',
     },
-    transactionInfo:{
+    transactionInfo: {
         min_amount_from: 0,
         payin_address: '',
         refund_address: '',
         payin_address_qr: '',
         payin_extra_id: '',//memo
+        currency_from: '',
     },
-    BACKEND_HOST: 'http://localhost:8000',
+    BACKEND_HOST: 'http://172.10.1.10:9876',
 //http://172.10.1.10:9876
 }

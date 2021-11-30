@@ -2,20 +2,20 @@
   &-step {
     &_3 {
       &__inscription {
-        text-align: center;
-        height: 20px;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 20px;
-        color: #0F75BD;
-        margin: 0 0 24px 0;
+        text-align: center !important;
+        height: 20px !important;
+        font-style: normal !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+        color: #0F75BD !important;
+        margin: 0 0 24px 0 !important;
       }
       &__img{
         &-container{
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          display: flex !important;
+          justify-content: center !important;
+          align-items: center !important;
         }
       }
     }

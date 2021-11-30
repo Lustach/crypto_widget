@@ -59,10 +59,12 @@ namespace MyWidget {
             let widget = new WidgetContainer()
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
-            fundData.fund = (await API.getCryptoWidget('1')).data
+            fundData.fund = (await API.getCryptoWidget(this.fundId)).data
             fundData.fund.id = this.fundId
             fundData.cryptoList = (await API.getCryptoList()).data
-            for (const key of ['btc','bch','bsv','eth']) {
+            for (const key of ['btc','eth']) {
+                // @ts-ignore
+                fundData.hideCryptoList[key]=(fundData.cryptoList[key])
                 // @ts-ignore
                 delete fundData.cryptoList[key]
             }

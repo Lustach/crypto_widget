@@ -1,85 +1,96 @@
 
-.w_blg{
-  &-step{
-    &_2{
-      &__inscription{
-        height: 17px;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
-        color: #031726;
-        text-align: left;
+.w_blg {
+  &-step {
+    &_2 {
+      &__inscription {
+        height: 17px !important;
+        font-style: normal !important;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+        line-height: 17px !important;
+        color: #031726 !important;
+        text-align: left !important;
+        margin-top: 12px !important;
       }
-      &__subtitle{
-        //width: 270px;
-        margin: 0 auto;
-        left: 16px;
-        top: 218px;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 20px;
-        text-align: center;
-        color: #031726;
+
+      &__subtitle {
+        //width: 270px !important;
+        margin: 0 auto !important;
+        left: 16px !important;
+        top: 218px !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+        text-align: center !important;
+        color: #031726 !important;
       }
-      &__inputs-container{
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 12px;
+
+      &__inputs-container {
+        display: flex !important;
+        flex-direction: column !important;
       }
-      &__input{
-        &-container{
-          display: flex;
-          flex-direction: column;
-          height: 63px;
-          position: relative;
+
+      &__input {
+        &-container {
+          display: flex !important;
+          flex-direction: column !important;
+          height: 63px !important;
+          position: relative !important;
+
           &:first-child {
             margin-bottom: 16px;
           }
-          label{
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 17px;
-            color: #031726;
-            margin-bottom: 6px;
-            text-align: left;
+
+          label {
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            line-height: 17px !important;
+            color: #031726 !important;
+            margin-bottom: 6px !important;
+            text-align: left !important;
           }
-          input{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            //padding: 5px 8px 5px 12px;
-            padding: 10px 50px 10px 12px;
-            height: 40px;
-            border: 2px solid #DAEDFB;
-            box-sizing: border-box;
-            border-radius: 5px;
+
+          input {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            //padding: 5px 8px 5px 12px !important;
+            padding: 10px 35px 10px 12px !important;
+            height: 40px !important;
+            border: 2px solid #DAEDFB !important;
+            box-sizing: border-box !important;
+            border-radius: 5px !important;
           }
-          img{
-            width: fit-content;
-            position: absolute;
-            right: 10px;
-            top: 33px;
-            cursor: pointer;
+
+          img {
+            width: fit-content !important;
+            position: absolute !important;
+            right: 10px !important;
+            top: 33px !important;
+            cursor: pointer !important;
           }
         }
 
       }
-      &_ltc{
-        text-decoration: underline;
+
+      &_ltc {
+        text-decoration: underline !important;
       }
-      &_timer{
-        color: #0F75BD;
+
+      &_timer {
+        color: #0F75BD !important;
       }
-      &__qr_container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 16px 0;
-        img{
-          width: 115px;
+
+      &__qr_container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 16px 0 !important;
+
+        img {
+          width: 100px !important;
         }
       }
     }

@@ -186,8 +186,8 @@ Developed by: Bruno Vieira
     font-family: arial;
     font-size: 10pt;
     padding: 12px 28px 10px 10px;
-
-    display: flex;
+    text-align: initial;
+    /*display: flex;*/
     height: 38px;
 }
 .bv_ul_inner li:first-child{
