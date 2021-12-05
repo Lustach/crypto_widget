@@ -18,13 +18,3 @@ export class EventBus extends EventTarget {
 }
 
 export const eventBus = new EventBus()
-// Usage
-// myEventBus.on('event-name', ({ detail }) => {
-//     console.log(detail);
-// });
-//
-// myEventBus.once('event-name', ({ detail }) => {
-//     console.log(detail);
-// });
-//
-

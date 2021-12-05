@@ -145,7 +145,6 @@ export default class BVSelect {
                                 document.getElementById(this.selector).onchange();
                             }
                             let itemImg = item.querySelector('img').getAttribute('src')
-                            console.log(itemImg, 'huhaihuoahuoah')
                             // Updates main div
                             document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` + `<span class="bv_atual_item__text" style="margin-right: 0;">${item.textContent}</span>` + "</div>" +
                                 `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
@@ -332,14 +331,14 @@ export default class BVSelect {
             if (Math.round(currentElementView + 50) > Math.round(currentWindowView)) {
 
                 selectedIDFocus = randomID;
-                document.getElementById("ul_" + randomID).style.position = "fixed";
-                document.getElementById("ul_" + randomID).style.bottom = "0px";
+                // document.getElementById("ul_" + randomID).style.position = "fixed";
+                // document.getElementById("ul_" + randomID).style.bottom = "0px";
 
             } else {
 
                 selectedIDFocus = 0;
-                document.getElementById("ul_" + randomID).style.position = "absolute";
-                document.getElementById("ul_" + randomID).style.bottom = "";
+                // document.getElementById("ul_" + randomID).style.position = "absolute";
+                // document.getElementById("ul_" + randomID).style.bottom = "";
             }
         }
 

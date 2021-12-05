@@ -1,6 +1,5 @@
 import {WidgetContainer} from "./util/util";
 import {Fund} from "./util/fund";
-import BVSelect from "./Multiselect/js/bvselect";
 import {Select} from "./Multiselect/SelectAPI";
 import {API as API} from "./plugins/axios";
 import {fundData} from './util/fundData'
@@ -33,7 +32,6 @@ namespace MyWidget {
          * Инстанс api
          */
         protected apiInstance: Api;
-
         /**
          * Constructor
          * @param {Api} instance
@@ -62,36 +60,24 @@ namespace MyWidget {
             fundData.fund = (await API.getCryptoWidget(this.fundId)).data
             fundData.fund.id = this.fundId
             fundData.cryptoList = (await API.getCryptoList()).data
-            for (const key of ['btc','eth']) {
-                // @ts-ignore
-                fundData.hideCryptoList[key]=(fundData.cryptoList[key])
-                // @ts-ignore
-                delete fundData.cryptoList[key]
-            }
             fundData.fromCryptoForm = {
                 cryptoFrom: this.cryptoFrom,
                 payoutAddress: this.payoutAddress
             }
+            for (const key of ['btc', 'eth', fundData.fromCryptoForm.cryptoFrom]) {
+                // @ts-ignore
+                fundData.hideCryptoList[key] = fundData.cryptoList[key]
+                // @ts-ignore
+                delete fundData.cryptoList[key]
+            }
             if (this.isWidgetPreview) {
                 fundData.fund.isWidgetPreview = this.isWidgetPreview
             }
-            console.log(fundData)
-            this.containerElement.append(widget.createStepContainer(this.containerElement))
-            new Select().initBVSelect()
-            // this.initBVSelect()
-            // let test = new Fund('hui', 'a', 'aa')
-            // test.setFundField({varName: 'logoSrc', value: 'huiblyad'})
-            // this.eventBus.subscribe('test',()=>{
-            //     console.log('haha1323')
-            // })
+            if (fundData.fund.status === 'ENABLED') {
+                this.containerElement.append(widget.createStepContainer(this.containerElement))
+                new Select().initBVSelect()
+            }
         }
-
-        //
-        // public partInit():void{
-        //     let widget = new WidgetContainer()
-        //     this.containerElement.append(widget.createStepContainer())
-        // }
-
     }
 
     /**

@@ -39,10 +39,12 @@ h6, h5 {
       display: flex !important;
 
       img {
-        width: 98px !important;
-        height: 57px !important;
+        width: 100% !important;
+        max-width: 98px !important;
+        height: 100% !important;
+        max-height: 57px !important;
         border-radius: 5px !important;
-        object-fit: contain !important;
+        //object-fit: contain !important;
       }
 
       h6 {

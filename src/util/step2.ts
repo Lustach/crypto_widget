@@ -1,6 +1,7 @@
 import qr from '../images/qr.png';
 import copy from '../images/copy.svg'
 import {fundData} from "./fundData";
+import parseNumber from "../jsExtends/Math/Ceil"
 export class Step2{
     createSubTitle(): HTMLElement {
         let container = document.createElement('div')
@@ -25,7 +26,6 @@ export class Step2{
         let label = document.createElement('label')
         let icon = document.createElement('img')
         icon.addEventListener('click',()=>{
-            console.log(input.value)
             navigator.clipboard.writeText(input.value).then(function() {
                 console.log('Async: Copying to clipboard was successful!');
             }, function(err) {
@@ -40,10 +40,11 @@ export class Step2{
         container.appendChild(icon)
         return container
     }
+
     createInscription():HTMLElement{
         let container = document.createElement('p')
         container.classList.add('w_blg-step_2__inscription')
-        container.innerHTML=`*Минимальная сумма: ${fundData.transactionInfo.min_amount_from} ${fundData.transactionInfo.currency_from.toUpperCase()}`
+        container.innerHTML=`*Минимальная сумма: ${parseNumber(fundData.transactionInfo.min_amount_from)} ${fundData.transactionInfo.currency_from.toUpperCase()}`
         return container
     }
 }

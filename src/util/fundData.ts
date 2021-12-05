@@ -33,5 +33,7 @@ export let fundData = {
         currency_from: '',
     },
     BACKEND_HOST: 'http://172.10.1.10:9876',
+//    http://46.148.230.14:9876
 //http://172.10.1.10:9876
+//    https://voblago.io
 }

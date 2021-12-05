@@ -131,16 +131,19 @@ Developed by: Bruno Vieira
 }
 
 .bv_ul_mobile {
-    width: 80% !important;
+    width: 100% !important;
     position: fixed !important;
-    top: 5% !important;
-    left: 10% !important;
+    /*top: 5% !important;*/
+    /*left: 10% !important;*/
     border: 0px !important;
-    height: 90% !important;
+    /*height: 90% !important;*/
     margin: 0px !important;
     overflow-y: scroll;
     z-index: 10 !important;
     max-height: 100% !important;
+    left: 0 !important;
+    top: 57px !important;
+    height: 100% !important;
 }
 
 .bv_ul_bg {
@@ -164,7 +167,7 @@ Developed by: Bruno Vieira
 }
 
 .bv_ul_inner {
-    position: absolute !important;
+    position: absolute ;
     margin-top: 0px;
     padding: 0;
     display: none;
