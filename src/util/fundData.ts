@@ -13,6 +13,7 @@ export let fundData = {
     selectedCrypto: {
         fullName: '',
     },
+    protocol: '',
     selectedCryptoKey: '',
     hideCryptoList: {},
     cryptoList: {

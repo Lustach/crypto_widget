@@ -1,7 +1,7 @@
 import {fundData} from '../../util/fundData'
 import {eventBus} from "../../customEvents/eventBus";
 // import {customEvent}from '../../customEvents/index'
-import altImg from '../../images/coin-svgrepo-com.svg'
+import {API} from "../../plugins/axios";
 
 export default class BVSelect {
 
@@ -62,6 +62,7 @@ export default class BVSelect {
                 var optionSeparator = x[i].getAttribute("data-separator");
                 var optionImg = x[i].getAttribute("data-img");
                 var optionIcon = x[i].getAttribute("data-icon");
+                var optionLabel = x[i].getAttribute("data-label")
                 // todo это конкретно для криптолиста
                 // var optionKey = x[i].getAttribute("data-key");
 
@@ -89,7 +90,11 @@ export default class BVSelect {
                 }
 
                 // Append
-                document.getElementById("ul_" + randomID).insertAdjacentHTML('beforeend', "<li class='" + is_disabled + " " + is_separator + "'  > " + has_attachment + " " + `<span>${optionText}</span>` + "</li>");
+                if (optionLabel) {
+                    document.getElementById("ul_" + randomID).insertAdjacentHTML('beforeend', "<li class='" + is_disabled + " " + is_separator + "'  > " + has_attachment + " " + `<span>${optionText} <span>${optionLabel}</span></span>` + "</li>");
+                } else {
+                    document.getElementById("ul_" + randomID).insertAdjacentHTML('beforeend', "<li class='" + is_disabled + " " + is_separator + "'  > " + has_attachment + " " + `<span>${optionText}</span>` + "</li>");
+                }
             }
 
             document.querySelectorAll('#ul_' + randomID + ' li').forEach((item) => {
@@ -146,8 +151,28 @@ export default class BVSelect {
                             }
                             let itemImg = item.querySelector('img').getAttribute('src')
                             // Updates main div
-                            document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` + `<span class="bv_atual_item__text" style="margin-right: 0;">${item.textContent}</span>` + "</div>" +
-                                `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
+                            let trimItemTextContent = item.textContent.trim()
+
+                            for (const key in fundData.cryptoList) {
+                                if (fundData.cryptoList[key].fullName === trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' ')) && fundData.cryptoList[key].isToken) {
+                                    fundData.protocol = fundData.cryptoList[key].protocol
+                                    console.warn(fundData.protocol, 'ahhaha')
+                                }
+                                // else if (!fundData.cryptoList[key].isToken) {
+                                //     console.log('SUKAFASFAS')
+                                //     fundData.protocol = ''
+                                // }
+                            }
+
+                            if (trimItemTextContent.lastIndexOf(' ') !== -1 && fundData.protocol) {
+                                document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` +
+                                    `<span class="bv_atual_item__text" style="margin-right: 0;">${trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' '))}  <span>${fundData.protocol}</span></span>` + "</div>" +
+                                    `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
+                            } else {
+                                document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` +
+                                    `<span class="bv_atual_item__text" style="margin-right: 0;">${item.textContent}</span>` + "</div>" +
+                                    `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
+                            }
                             document.getElementById("ul_" + randomID).style.display = "none";
                             eventBus.emit(selectEvent, {textContent: item.textContent})
                             // Remove class so Body has Scroll Again
@@ -185,7 +210,8 @@ export default class BVSelect {
             element_ul.style.width = select_width + "px";
 
             if (this.searchbox == true) {
-                document.querySelector("#ul_" + randomID).insertAdjacentHTML('afterbegin', '<li class="nofocus"><div class="innerinput"><input placeholder="' + SearchPlaceholder + '" class="bv_input" id="input_' + randomID + '" type="text"></div</li>');
+                document.querySelector("#ul_" + randomID).insertAdjacentHTML('afterbegin', '<li class="nofocus"><div class="innerinput"><input' +
+                    ' placeholder="' + SearchPlaceholder + '" class="bv_input" id="input_' + randomID + '" type="text"></div</li>');
             }
 
             // Get Selected Option

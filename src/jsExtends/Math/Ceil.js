@@ -101,10 +101,10 @@ Number.prototype.countDecimals = function () {
 
 
 let x = 23.453453453;
-console.log(x.countDecimals())
-
-console.log(Math.round10(55.55, -1))
-console.log(Math.round10(55.549, -1))  // 55.5)
+// console.log(x.countDecimals())
+//
+// console.log(Math.round10(55.55, -1))
+// console.log(Math.round10(55.549, -1))  // 55.5)
 
 //если перед запятой >= 3 знаков то число считается большим и знаки после запятой не учитываются абсолютно
 // если перед запятой < 3 знаков и число больше единицы, то число считается обычным и оставляется 2 знака после запятой (пример: 12.3456789 -> 12.35

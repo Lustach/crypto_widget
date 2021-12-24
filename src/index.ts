@@ -1,5 +1,4 @@
 import {WidgetContainer} from "./util/util";
-import {Fund} from "./util/fund";
 import {Select} from "./Multiselect/SelectAPI";
 import {API as API} from "./plugins/axios";
 import {fundData} from './util/fundData'
@@ -57,6 +56,8 @@ namespace MyWidget {
             let widget = new WidgetContainer()
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
+            //todo перенести эту строчку в widgetCOntainer и убрать аргументы функции
+            console.log(await API.getSvg('http://172.10.1.10:9876/static/images/cryptocurrency/1inch.svg'))
             fundData.fund = (await API.getCryptoWidget(this.fundId)).data
             fundData.fund.id = this.fundId
             fundData.cryptoList = (await API.getCryptoList()).data

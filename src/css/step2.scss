@@ -38,6 +38,12 @@
           height: 63px !important;
           position: relative !important;
 
+          div {
+            position: relative;
+            margin-bottom: 6px !important;
+            text-align: left !important;
+          }
+
           &:first-child {
             margin-bottom: 16px;
           }
@@ -47,8 +53,20 @@
             font-size: 14px !important;
             line-height: 17px !important;
             color: #031726 !important;
-            margin-bottom: 6px !important;
             text-align: left !important;
+          }
+
+          span {
+            //position: absolute;
+            background: #0F75BD;
+            border-radius: 2px;
+            color: white;
+            padding: 2px 4px;
+            margin-left: 3px;
+            margin-top: -2px;
+            text-align: center;
+            font-weight: 500 !important;
+            font-size: 13px !important;
           }
 
           input {

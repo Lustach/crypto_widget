@@ -126,8 +126,10 @@ export class WidgetContainer extends Step2 {
         footerImg.setAttribute('src', arrow)
         if (!fundData.fund.isWidgetPreview) {
             footer.addEventListener('click', async () => {
+                console.log(fundData, '1')
                 if (fundData.selectedCryptoKey) {
                     if (this.stepIndex === 1) {
+                        console.log('afsdf')
                         this.stepIndex = 2
                         await this.createTransaction()
                         this.rerenderContainer()
@@ -222,11 +224,12 @@ export class WidgetContainer extends Step2 {
         btn.appendChild(btnName)
         btn.classList.add('w_blg-step_1_crypto-item')
         console.warn(String(fundData.fromCryptoForm.cryptoFrom === 'eth'))
-        if(String(fundData.fromCryptoForm.cryptoFrom === 'eth') && btnNameD === 'Ethereum'){
-            btn.setAttribute('disabled','disabled')
-        }
-        else if(String(fundData.fromCryptoForm.cryptoFrom === 'btc') && btnNameD === 'BitCoin'){
-            btn.setAttribute('disabled','disabled')
+        if (String(fundData.fromCryptoForm.cryptoFrom === 'eth') && btnNameD === 'Ethereum') {
+            btn.setAttribute('disabled', 'disabled')
+            btn.classList.add('w_blg-step_1_crypto-item--disabled')
+        } else if (String(fundData.fromCryptoForm.cryptoFrom === 'btc') && btnNameD === 'BitCoin') {
+            btn.setAttribute('disabled', 'disabled')
+            btn.classList.add('w_blg-step_1_crypto-item--disabled')
         }
         // btnNameD === 'eth' ? btn.setAttribute('disabled', String(fundData.fromCryptoForm.cryptoFrom === 'eth')) : ''
         if (!fundData.fund.isWidgetPreview) {
@@ -298,7 +301,7 @@ export class WidgetContainer extends Step2 {
         for (const listItem in fundData.cryptoList) {
             // @ts-ignore
             let item = fundData.cryptoList[listItem]
-            select.appendChild(this.createSelectOption(listItem, item.image, item.fullName))
+            select.appendChild(this.createSelectOption(listItem, item))
             // select.appendChild(this.createSelectOption(listItem.name, listItem.image, listItem.fullName))
         }
         // select.appendChild(this.createSelectOption('value1', 'https://img.icons8.com/color/2x/usa.png', 'Value1'))
@@ -306,12 +309,16 @@ export class WidgetContainer extends Step2 {
         return select
     }
 
-    createSelectOption(value: string, img: string, innerHtml: string): HTMLElement {
+    createSelectOption(value: string, item: { image: string, fullName: string, protocol: string, isToken: boolean }): HTMLElement {
         let option = document.createElement('option')
         option.setAttribute('value', value)
-        option.setAttribute('data-img', img)
+        option.setAttribute('data-img', item.image)
         option.setAttribute('data-key', value)
-        option.innerHTML = innerHtml
+        if (item.isToken) {
+            // console.log(item)
+            option.setAttribute('data-label', item.protocol)
+        }
+        option.innerHTML = item.fullName
         return option
         // return
     }
@@ -319,14 +326,33 @@ export class WidgetContainer extends Step2 {
 
 let widgetContainer = new WidgetContainer()
 eventBus.on('select', (item) => {
+    console.log('hi')
     widgetContainer.setCryptoBtnListUnActive()
     // @ts-ignore
     fundData.selectedCrypto = fundData.cryptoList[item.detail.key]
     // fundData.selectedCryptoKey =
     for (const key in fundData.cryptoList) {
         // @ts-ignore
-        if (fundData.cryptoList[key].fullName === item.detail.textContent.trim())
+        // console.log(fundData, fundData.cryptoList[key].fullName, item.detail.textContent.trim().slice(0, item.detail.textContent.trim().indexOf(' ')))
+        // if (item.detail.textContent.trim().lastIndexOf(' ') !== -1) {
+        //     console.log(item.detail.textContent, 'hui')
+        // }
+        // @ts-ignore
+        if (item.detail.textContent.trim().lastIndexOf(' ') !== -1 && fundData.cryptoList[key].isToken) {
+            // @ts-ignore
+            // console.log(fundData.cryptoList[key].fullName, item.detail.textContent.trim().slice(0, item.detail.textContent.trim().lastIndexOf(' ')),'ochko')
+            // @ts-ignore
+            if (fundData.cryptoList[key].fullName === item.detail.textContent.trim().slice(0, item.detail.textContent.trim().lastIndexOf(' '))) {
+                // console.log(item,'aaaa')
+                // @ts-ignore
+                console.log(item.detail.textContent.trim().lastIndexOf(' '), fundData.cryptoList[key].fullName, item.detail.textContent.trim())
+                fundData.selectedCryptoKey = key
+                console.log(fundData)
+            }
+            // @ts-ignore
+        } else if (fundData.cryptoList[key].fullName === item.detail.textContent.trim()) {
             fundData.selectedCryptoKey = key
+        }
     }
     // fundData.selectedCrypto = fundData.cryptoList.filter(e => e.fullName === itemTextContent.detail.trim())
     // @ts-ignore

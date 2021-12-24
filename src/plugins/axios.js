@@ -14,10 +14,18 @@ export const API = {
     // }),
     // }
     getCryptoWidget: (id) => axios.get(`/crypto_widget/${id}/`),
-    getCryptoList:()=>axios.get('/currency/'),
-    createTransaction: (data)=>axios.post('crypto_transaction/',{...data})
+    getCryptoList: () => axios.get('/currency/'),
+    createTransaction: (data) => axios.post('crypto_transaction/', {...data}),
+    getSvg: (url) => axios.get(url, {
+        baseURL: 'http://172.10.1.10:9876',
+        headers: {
+            // 'content-type': 'text/plain',
+            "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
+    })
     // qQpB2Kv1z8QnKXPo5Th7
 }
 
 axios.defaults.baseURL = fundData.BACKEND_HOST
-axios.defaults.headers.common['Content-Type'] = 'application/json';
+// axios.defaults.headers.common['Content-Type'] = 'text/plain';
