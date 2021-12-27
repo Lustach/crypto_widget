@@ -110,11 +110,9 @@ export class WidgetContainer extends Step2 {
         footerImg.setAttribute('src', arrow)
         if (!fundData.fund.isWidgetPreview) {
             footer.addEventListener('click', async () => {
-                footer.setAttribute('disabled','disabled')
-                console.log(fundData, '1')
+                footer.setAttribute('disabled', 'disabled')
                 if (selectInfo.selectedCryptoKey) {
                     if (this.stepIndex === 1) {
-                        console.log('afsdf')
                         this.stepIndex = 2
                         await this.createTransaction()
                         this.rerenderContainer()
@@ -125,6 +123,8 @@ export class WidgetContainer extends Step2 {
                         this.stepIndex = 2
                         this.rerenderContainer()
                     }
+                } else {
+                    footer.removeAttribute('disabled')
                 }
             })
         }

@@ -62,7 +62,6 @@ export default class BVSelect {
                 var optionImg = x[i].getAttribute("data-img");
                 var optionIcon = x[i].getAttribute("data-icon");
                 var optionLabel = x[i].getAttribute("data-label")
-                console.log(optionText)
                 // todo это конкретно для криптолиста
                 // var optionKey = x[i].getAttribute("data-key");
 
