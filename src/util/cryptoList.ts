@@ -7,12 +7,15 @@ type cryptolistItem = {
     image: string, fullName: string, protocol: string, isToken: boolean
 }
 
+type cryptoList = {
+    [key: string]: cryptolistItem
+}
+
 interface selectInfo {
-    hideCryptoList: object
-    cryptoList: object
+    hideCryptoList: cryptoList
+    cryptoList: cryptoList
 
     selectedCrypto: cryptolistItem
-    protocol: string
     selectedCryptoKey: string
     fromCryptoForm: fromCryptoForm
 }
@@ -20,7 +23,7 @@ interface selectInfo {
 
 export class CryptoList implements selectInfo {
     public hideCryptoList = {
-        btc: <cryptolistItem>{
+        btc: {
             blockchain: "bitcoin",
             extraIdName: null,
             fullName: "Bitcoin",
@@ -30,7 +33,7 @@ export class CryptoList implements selectInfo {
         }
     }
     public cryptoList = {
-        '1inch': <cryptolistItem>{
+        '1inch': {
             image: "", isToken: false, protocol: "",
             fullName: ''
         }
@@ -42,7 +45,6 @@ export class CryptoList implements selectInfo {
         fullName: "",
         image: "",
     }
-    public protocol: string = ''
     public selectedCryptoKey: string = ''
     public fromCryptoForm = {
         payoutAddress: '',
