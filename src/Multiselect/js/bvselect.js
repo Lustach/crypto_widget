@@ -62,6 +62,7 @@ export default class BVSelect {
                 var optionImg = x[i].getAttribute("data-img");
                 var optionIcon = x[i].getAttribute("data-icon");
                 var optionLabel = x[i].getAttribute("data-label")
+                console.log(optionText)
                 // todo это конкретно для криптолиста
                 // var optionKey = x[i].getAttribute("data-key");
 
@@ -97,7 +98,6 @@ export default class BVSelect {
             }
 
             document.querySelectorAll('#ul_' + randomID + ' li').forEach((item) => {
-
                 item.addEventListener('click', (e) => {
                     const index = Array.from(item.parentNode.children).indexOf((item))
                     var selected_option = document.getElementById(this.selector);
@@ -150,22 +150,12 @@ export default class BVSelect {
                             }
                             let itemImg = item.querySelector('img').getAttribute('src')
                             // Updates main div
-                            let trimItemTextContent = item.textContent.trim()
+                            let selectedItemText = item.childNodes[3].childNodes[0].data
+                            let selectedItemProtocol = item.childNodes[3]?.childNodes[1]?.innerHTML
 
-                            for (const key in selectInfo.cryptoList) {
-                                if (selectInfo.cryptoList[key].fullName === trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' ')) && selectInfo.cryptoList[key].isToken) {
-                                    selectInfo.protocol = selectInfo.cryptoList[key].protocol
-                                    console.warn(selectInfo.protocol, 'ahhaha')
-                                }
-                                // else if (!selectInfo.cryptoList[key].isToken) {
-                                //     console.log('SUKAFASFAS')
-                                //     selectInfo.protocol = ''
-                                // }
-                            }
-
-                            if (trimItemTextContent.lastIndexOf(' ') !== -1 && selectInfo.protocol) {
+                            if (selectedItemProtocol) {
                                 document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` +
-                                    `<span class="bv_atual_item__text" style="margin-right: 0;">${trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' '))}  <span>${selectInfo.protocol}</span></span>` + "</div>" +
+                                    `<span class="bv_atual_item__text" style="margin-right: 0;">${selectedItemText}  <span>${selectedItemProtocol}</span></span>` + "</div>" +
                                     `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
                             } else {
                                 document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` +
@@ -173,7 +163,7 @@ export default class BVSelect {
                                     `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
                             }
                             document.getElementById("ul_" + randomID).style.display = "none";
-                            eventBus.emit(selectEvent, {textContent: item.textContent})
+                            eventBus.emit(selectEvent, {textContent: selectedItemText, protocol: selectedItemProtocol})
                             // Remove class so Body has Scroll Again
                             document.body.classList.remove("stop-scrolling");
                             if (document.body.contains(document.getElementById('deletebg'))) {
@@ -184,7 +174,7 @@ export default class BVSelect {
                         }
 
                         // When click, resets search filter
-                        if (this.searchbox == true) {
+                        if (this.searchbox === true) {
                             document.getElementById("input_" + randomID).value = "";
                             Array.from(document.querySelectorAll("#ul_" + randomID + " li")).forEach(function (val) {
                                 val.style.display = "block";

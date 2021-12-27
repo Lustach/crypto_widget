@@ -33,26 +33,7 @@ export class TransactionInfo implements ITransactionInfo {
     public refund_address = "GAPVIBT33C6EOP6RBUYQG5G7YRIF7P5NI4C6NGUDWYKYAB5I25AKP2VC"
     public transaction_id = "p1fvsr6xhnfzth5y9d"
 
-
     public create(data: ITransactionInfo) {
         Object.assign(this, data)
     }
-
-    // constructor(created_at: string, crypto_widget: number, currency_from: string, currency_from_protocol: string, currency_to: string, id: number, is_active: boolean, min_amount_from: number, payin_address: string, payin_address_qr: string, payin_extra_id: string, payout_address: string, payout_extra_id: string, refund_address: string, transaction_id: string) {
-    //     this.created_at = created_at;
-    //     this.crypto_widget = crypto_widget;
-    //     this.currency_from = currency_from;
-    //     this.currency_from_protocol = currency_from_protocol;
-    //     this.currency_to = currency_to;
-    //     this.id = id;
-    //     this.is_active = is_active;
-    //     this.min_amount_from = min_amount_from;
-    //     this.payin_address = payin_address;
-    //     this.payin_address_qr = payin_address_qr;
-    //     this.payin_extra_id = payin_extra_id; //memo
-    //     this.payout_address = payout_address;
-    //     this.payout_extra_id = payout_extra_id;
-    //     this.refund_address = refund_address;
-    //     this.transaction_id = transaction_id;
-    // }
 }

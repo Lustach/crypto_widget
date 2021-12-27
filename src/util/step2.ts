@@ -32,13 +32,6 @@ export class Step2 {
         footerBtnReady.style.left = 'auto'
         footerBtnReady.style.borderRadius = '0px 0px 5px 0px'
         return footerBtnReady
-        // footer.classList.add('w_blg-step_footer')
-        // footerImg.style.transform = 'rotate(180deg)'
-        // footerImg.style.marginRight = '11px'
-        // footerImg.style.marginLeft = '0'
-        // footer.style.maxWidth='179px'
-        // footer.appendChild(footerImg)
-        // footer.appendChild(footerSpan)
     }
 
     createInput(labelName: string, inputValue: string): HTMLElement {
@@ -49,7 +42,7 @@ export class Step2 {
         let label = document.createElement('label')
         labelContainer.appendChild(label)
         // @ts-ignore
-        if (labelName === 'Адрес кошелька' && selectInfo.cryptoList[selectInfo.selectedCryptoKey].protocol && selectInfo.cryptoList[selectInfo.selectedCryptoKey].isToken) {
+        if (labelName === 'Адрес кошелька' && selectInfo.selectedCrypto.protocol && selectInfo.selectedCrypto.isToken) {
             // @ts-ignore
             console.log(selectInfo.cryptoList[selectInfo.selectedCryptoKey])
             let labelProtocol = document.createElement('span')

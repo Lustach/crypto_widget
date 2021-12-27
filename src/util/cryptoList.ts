@@ -1,10 +1,12 @@
-export type TCryptoList = {
-    image: string, fullName: string, protocol: string, isToken: boolean
-}
-interface fromCryptoForm{
+type fromCryptoForm = {
     payoutAddress: string
     cryptoFrom: string
 }
+
+type cryptolistItem = {
+    image: string, fullName: string, protocol: string, isToken: boolean
+}
+
 interface selectInfo {
     hideCryptoList: object
     cryptoList: object
@@ -18,11 +20,14 @@ interface selectInfo {
 
 export class CryptoList implements selectInfo {
     public hideCryptoList = {}
-    public cryptoList = {}
-
-    public selectedCrypto = {
-        fullName: '',
+    public cryptoList = {
+        '1inch': <cryptolistItem>{
+            image: "", isToken: false, protocol: "",
+            fullName: ''
+        }
     }
+
+    public selectedCrypto = {}
     public protocol = ''
     public selectedCryptoKey = ''
     public fromCryptoForm = {

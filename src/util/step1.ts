@@ -44,6 +44,41 @@ export class Step1 {
         })
     }
 
+    createCryptoBtnContainer(): HTMLElement {
+        let container = document.createElement('div')
+        container.classList.add('w_blg-step_1_crypto__container')
+        return container
+    }
+
+
+    createCryptoSelect(): HTMLElement {
+        this.createSearchIconToSelect()
+
+        let select = document.createElement('select')
+        select.setAttribute('id', 'selectBox')
+//todo
+        for (const [listItem, value] of Object.entries(selectInfo.cryptoList)) {
+            // @ts-ignore
+            select.appendChild(this.createSelectOption(listItem, value))
+        }
+
+        return select
+    }
+
+    createSelectOption(value: string, item: { image: string, fullName: string, protocol: string, isToken: boolean }): HTMLElement {
+        let option = document.createElement('option')
+        option.setAttribute('value', value)
+        option.setAttribute('data-img', item.image)
+        option.setAttribute('data-key', value)
+        if (item.isToken) {
+            // console.log(item)
+            option.setAttribute('data-label', item.protocol)
+        }
+        option.innerHTML = item.fullName
+        return option
+        // return
+    }
+
     createCryptoBtn(btnImgSrc: string, btnNameD: string): HTMLElement {
         let btn = document.createElement('button')
         let btnImg = document.createElement('img')
@@ -72,6 +107,7 @@ export class Step1 {
                     if (selectInfo.hideCryptoList[key].fullName === btnNameD) {
                         // @ts-ignore
                         selectInfo.selectedCrypto = selectInfo.hideCryptoList[key]
+                        console.error(selectInfo.selectedCrypto,'DADA')
                         selectInfo.selectedCryptoKey = key
                     }
                 }

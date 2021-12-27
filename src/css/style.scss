@@ -227,7 +227,13 @@ h6, h5 {
       text-align: center !important;
       color: #F1F5F7 !important;
       cursor: pointer !important;
-
+      &:disabled{
+        background-color: #c6d7de !important;
+        border: none !important;
+        &:hover{
+          filter: none !important;
+        }
+      }
       &:hover {
         filter: brightness(110%) !important;
       }

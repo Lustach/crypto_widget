@@ -1,4 +1,4 @@
-import Heart from '../images/Heart.png'
+import Heart from '@/images/Heart.svg'
 
 export class Step3 {
 

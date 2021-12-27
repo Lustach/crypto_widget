@@ -45,13 +45,13 @@ export class WidgetContainer extends Step2 {
         container.appendChild(this.createFundInfoContainer())
         if (this.stepIndex === 1) {
             container.appendChild(this.step1.createSubTitle())
-            let cryptoBtnContainer = this.createCryptoBtnContainer()
+            let cryptoBtnContainer = this.step1.createCryptoBtnContainer()
             cryptoBtnContainer.appendChild(this.step1.createCryptoBtn(btc, 'Bitcoin'))
             cryptoBtnContainer.appendChild(this.step1.createCryptoBtn(eth, 'Ethereum'))
             if (!this.step1Container.children.length) {
                 console.error('error')
                 this.step1Container.appendChild(cryptoBtnContainer)
-                this.step1Container.appendChild(this.createCryptoSelect())
+                this.step1Container.appendChild(this.step1.createCryptoSelect())
             }
             container.appendChild(this.step1Container)
         } else if (this.stepIndex === 2) {
@@ -102,14 +102,15 @@ export class WidgetContainer extends Step2 {
         transactionInfo.create(result)
     }
 
-    createFooter(): HTMLDivElement {
+    createFooter(): HTMLButtonElement {
         // let selectedItemFullName = document.querySelector('.bv_atual_item__text')?.textContent?.trim()
-        let footer = document.createElement('div')
+        let footer = document.createElement('button')
         let footerSpan = document.createElement('span')
         let footerImg = document.createElement('img')
         footerImg.setAttribute('src', arrow)
         if (!fundData.fund.isWidgetPreview) {
             footer.addEventListener('click', async () => {
+                footer.setAttribute('disabled','disabled')
                 console.log(fundData, '1')
                 if (selectInfo.selectedCryptoKey) {
                     if (this.stepIndex === 1) {
@@ -178,74 +179,16 @@ export class WidgetContainer extends Step2 {
         return container
     }
 
-    createCryptoBtnContainer(): HTMLElement {
-        let container = document.createElement('div')
-        container.classList.add('w_blg-step_1_crypto__container')
-        return container
-    }
 
-
-    createCryptoSelect(): HTMLElement {
-        this.step1.createSearchIconToSelect()
-
-        let select = document.createElement('select')
-        select.setAttribute('id', 'selectBox')
-//todo
-        for (const [listItem, value] of Object.entries(selectInfo.cryptoList)) {
-            console.log(value)
-            // @ts-ignore
-            select.appendChild(this.createSelectOption(listItem, value))
-        }
-
-        return select
-    }
-
-    createSelectOption(value: string, item: { image: string, fullName: string, protocol: string, isToken: boolean }): HTMLElement {
-        let option = document.createElement('option')
-        option.setAttribute('value', value)
-        option.setAttribute('data-img', item.image)
-        option.setAttribute('data-key', value)
-        if (item.isToken) {
-            // console.log(item)
-            option.setAttribute('data-label', item.protocol)
-        }
-        option.innerHTML = item.fullName
-        return option
-        // return
-    }
 }
 
 let widgetContainer = new WidgetContainer()
 eventBus.on('select', (item) => {
     widgetContainer.step1.setCryptoBtnListUnActive()
-    // @ts-ignore
-    fundData.selectedCrypto = selectInfo.cryptoList[item.detail.key]
-    // fundData.selectedCryptoKey =
-    for (const key in selectInfo.cryptoList) {
-        // @ts-ignore
-        // console.log(fundData, selectInfo.cryptoList[key].fullName, item.detail.textContent.trim().slice(0, item.detail.textContent.trim().indexOf(' ')))
-        // if (item.detail.textContent.trim().lastIndexOf(' ') !== -1) {
-        //     console.log(item.detail.textContent, 'hui')
-        // }
-        // @ts-ignore
-        if (item.detail.textContent.trim().lastIndexOf(' ') !== -1 && selectInfo.cryptoList[key].isToken) {
-            // @ts-ignore
-            // console.log(selectInfo.cryptoList[key].fullName, item.detail.textContent.trim().slice(0, item.detail.textContent.trim().lastIndexOf(' ')),'ochko')
-            // @ts-ignore
-            if (selectInfo.cryptoList[key].fullName === item.detail.textContent.trim().slice(0, item.detail.textContent.trim().lastIndexOf(' '))) {
-                // console.log(item,'aaaa')
-                // @ts-ignore
-                console.log(item.detail.textContent.trim().lastIndexOf(' '), selectInfo.cryptoList[key].fullName, item.detail.textContent.trim())
-                selectInfo.selectedCryptoKey = key
-                console.log(fundData)
-            }
-            // @ts-ignore
-        } else if (selectInfo.cryptoList[key].fullName === item.detail.textContent.trim()) {
+    for (const [key, value] of Object.entries(selectInfo.cryptoList)) {
+        if (value.fullName === item.detail.textContent.trim()) {
+            selectInfo.selectedCrypto = value
             selectInfo.selectedCryptoKey = key
         }
     }
-    // fundData.selectedCrypto = selectInfo.cryptoList.filter(e => e.fullName === itemTextContent.detail.trim())
-    // @ts-ignore
 })
-// eventBus.emit('event-name', 'Hello'); // => Hello Hello
-// eventBus.emit('event-name', 'World'); // => World
