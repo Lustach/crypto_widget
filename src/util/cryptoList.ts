@@ -3,19 +3,19 @@ type fromCryptoForm = {
     cryptoFrom: string
 }
 
-type cryptolistItem = {
+type cryptoListItem = {
     image: string, fullName: string, protocol: string, isToken: boolean
 }
 
 type cryptoList = {
-    [key: string]: cryptolistItem
+    [key: string]: cryptoListItem
 }
 
 interface selectInfo {
     hideCryptoList: cryptoList
     cryptoList: cryptoList
 
-    selectedCrypto: cryptolistItem
+    selectedCrypto: cryptoListItem
     selectedCryptoKey: string
     fromCryptoForm: fromCryptoForm
 }
