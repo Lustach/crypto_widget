@@ -11,7 +11,7 @@ interface selectInfo {
     hideCryptoList: object
     cryptoList: object
 
-    selectedCrypto: object
+    selectedCrypto: cryptolistItem
     protocol: string
     selectedCryptoKey: string
     fromCryptoForm: fromCryptoForm
@@ -19,7 +19,16 @@ interface selectInfo {
 
 
 export class CryptoList implements selectInfo {
-    public hideCryptoList = {}
+    public hideCryptoList = {
+        btc: <cryptolistItem>{
+            blockchain: "bitcoin",
+            extraIdName: null,
+            fullName: "Bitcoin",
+            image: "http://127.0.0.1:8000/static/images/cryptocurrency/btc.svg",
+            isToken: false,
+            protocol: "",
+        }
+    }
     public cryptoList = {
         '1inch': <cryptolistItem>{
             image: "", isToken: false, protocol: "",
@@ -27,9 +36,14 @@ export class CryptoList implements selectInfo {
         }
     }
 
-    public selectedCrypto = {}
-    public protocol = ''
-    public selectedCryptoKey = ''
+    public selectedCrypto = {
+        protocol: '',
+        isToken: false,
+        fullName: "",
+        image: "",
+    }
+    public protocol: string = ''
+    public selectedCryptoKey: string = ''
     public fromCryptoForm = {
         payoutAddress: '',
         cryptoFrom: '',

@@ -9,7 +9,7 @@ import {ITransactionInfo, TransactionInfo} from "@/util/Transaction";
 import {FundData} from "@/util/fundData";
 import {selectInfo} from "@/util/step1";
 import {eventBus} from "@/customEvents/eventBus";
-import {API as API} from "@/plugins/axios";
+import {API} from "@/plugins/axios";
 
 export let transactionInfo = new TransactionInfo()
 export let fundData = new FundData()
@@ -49,7 +49,6 @@ export class WidgetContainer extends Step2 {
             cryptoBtnContainer.appendChild(this.step1.createCryptoBtn(btc, 'Bitcoin'))
             cryptoBtnContainer.appendChild(this.step1.createCryptoBtn(eth, 'Ethereum'))
             if (!this.step1Container.children.length) {
-                console.error('error')
                 this.step1Container.appendChild(cryptoBtnContainer)
                 this.step1Container.appendChild(this.step1.createCryptoSelect())
             }
@@ -103,7 +102,6 @@ export class WidgetContainer extends Step2 {
     }
 
     createFooter(): HTMLButtonElement {
-        // let selectedItemFullName = document.querySelector('.bv_atual_item__text')?.textContent?.trim()
         let footer = document.createElement('button')
         let footerSpan = document.createElement('span')
         let footerImg = document.createElement('img')

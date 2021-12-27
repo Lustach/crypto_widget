@@ -4,9 +4,8 @@ import {API as API} from "@/plugins/axios";
 import {fundData} from "@/util/util";
 import {selectInfo} from '@/util/step1'
 // импорты css файлов..
-import('./css/style.scss')
-/* @ts-ignore */
-import('./Multiselect/css/bvselect.css')
+import('@/css/style.scss')
+import('@/Multiselect/css/bvselect.css')
 namespace MyWidget {
     /**
      * Виджет кнопки

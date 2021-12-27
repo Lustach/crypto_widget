@@ -41,13 +41,9 @@ export class Step2 {
         let labelContainer = document.createElement('div')
         let label = document.createElement('label')
         labelContainer.appendChild(label)
-        // @ts-ignore
         if (labelName === 'Адрес кошелька' && selectInfo.selectedCrypto.protocol && selectInfo.selectedCrypto.isToken) {
-            // @ts-ignore
-            console.log(selectInfo.cryptoList[selectInfo.selectedCryptoKey])
             let labelProtocol = document.createElement('span')
-            // @ts-ignore
-            labelProtocol.innerHTML = selectInfo.cryptoList[selectInfo.selectedCryptoKey].protocol
+            labelProtocol.innerHTML = selectInfo.selectedCrypto.protocol
             labelContainer.appendChild(labelProtocol)
         }
         let icon = document.createElement('img')

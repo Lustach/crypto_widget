@@ -58,7 +58,6 @@ export class Step1 {
         select.setAttribute('id', 'selectBox')
 //todo
         for (const [listItem, value] of Object.entries(selectInfo.cryptoList)) {
-            // @ts-ignore
             select.appendChild(this.createSelectOption(listItem, value))
         }
 
@@ -88,7 +87,6 @@ export class Step1 {
         btn.appendChild(btnImg)
         btn.appendChild(btnName)
         btn.classList.add('w_blg-step_1_crypto-item')
-        console.warn(String(selectInfo.fromCryptoForm.cryptoFrom === 'eth'))
         if (String(selectInfo.fromCryptoForm.cryptoFrom === 'eth') && btnNameD === 'Ethereum') {
             btn.setAttribute('disabled', 'disabled')
             btn.classList.add('w_blg-step_1_crypto-item--disabled')
@@ -102,12 +100,9 @@ export class Step1 {
                     this.unSelect()
                     this.createSearchIconToSelect()
                 }
-                for (const key in selectInfo.hideCryptoList) {
-                    // @ts-ignore
-                    if (selectInfo.hideCryptoList[key].fullName === btnNameD) {
-                        // @ts-ignore
-                        selectInfo.selectedCrypto = selectInfo.hideCryptoList[key]
-                        console.error(selectInfo.selectedCrypto,'DADA')
+                for (const [key, value] of Object.entries(selectInfo.hideCryptoList)) {
+                    if (value.fullName === btnNameD) {
+                        selectInfo.selectedCrypto = value
                         selectInfo.selectedCryptoKey = key
                     }
                 }
