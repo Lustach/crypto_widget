@@ -1,7 +1,6 @@
-import {fundData} from '../../util/fundData'
-import {eventBus} from "../../customEvents/eventBus";
-// import {customEvent}from '../../customEvents/index'
-import {API} from "../../plugins/axios";
+import {fundData} from '@/util/util'
+import {eventBus} from "@/customEvents/eventBus";
+import {selectInfo} from "@/util/step1";
 
 export default class BVSelect {
 
@@ -153,20 +152,20 @@ export default class BVSelect {
                             // Updates main div
                             let trimItemTextContent = item.textContent.trim()
 
-                            for (const key in fundData.cryptoList) {
-                                if (fundData.cryptoList[key].fullName === trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' ')) && fundData.cryptoList[key].isToken) {
-                                    fundData.protocol = fundData.cryptoList[key].protocol
-                                    console.warn(fundData.protocol, 'ahhaha')
+                            for (const key in selectInfo.cryptoList) {
+                                if (selectInfo.cryptoList[key].fullName === trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' ')) && selectInfo.cryptoList[key].isToken) {
+                                    selectInfo.protocol = selectInfo.cryptoList[key].protocol
+                                    console.warn(selectInfo.protocol, 'ahhaha')
                                 }
-                                // else if (!fundData.cryptoList[key].isToken) {
+                                // else if (!selectInfo.cryptoList[key].isToken) {
                                 //     console.log('SUKAFASFAS')
-                                //     fundData.protocol = ''
+                                //     selectInfo.protocol = ''
                                 // }
                             }
 
-                            if (trimItemTextContent.lastIndexOf(' ') !== -1 && fundData.protocol) {
+                            if (trimItemTextContent.lastIndexOf(' ') !== -1 && selectInfo.protocol) {
                                 document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` +
-                                    `<span class="bv_atual_item__text" style="margin-right: 0;">${trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' '))}  <span>${fundData.protocol}</span></span>` + "</div>" +
+                                    `<span class="bv_atual_item__text" style="margin-right: 0;">${trimItemTextContent.slice(0, trimItemTextContent.lastIndexOf(' '))}  <span>${selectInfo.protocol}</span></span>` + "</div>" +
                                     `<i id='arrow_" + randomID + "' class='arrows_bv" + " arrow" + " down'></i>`;
                             } else {
                                 document.getElementById("main_" + randomID).innerHTML = "<div class='bv_atual-selected__item'>" + `<img alt='' class="bv_atual_item__img" src=${itemImg} >` +
@@ -282,8 +281,8 @@ export default class BVSelect {
                             val.classList.remove("up");
                             val.classList.add("down");
                         });
-                        document.querySelector("#arrow_" + randomID).classList.remove("down");
-                        document.querySelector("#arrow_" + randomID).classList.add("up");
+                        document.querySelector("#arrow_" + randomID)?.classList.remove("down");
+                        document.querySelector("#arrow_" + randomID)?.classList.add("up");
                     }
 
                     // Call function at end of the dropdown movement

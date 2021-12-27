@@ -1,7 +1,8 @@
-import {WidgetContainer} from "./util/util";
-import {Select} from "./Multiselect/SelectAPI";
-import {API as API} from "./plugins/axios";
-import {fundData} from './util/fundData'
+import {WidgetContainer} from "@/util/util";
+import {Select} from "@/Multiselect/SelectAPI";
+import {API as API} from "@/plugins/axios";
+import {fundData} from "@/util/util";
+import {selectInfo} from '@/util/step1'
 // импорты css файлов..
 import('./css/style.scss')
 /* @ts-ignore */
@@ -31,6 +32,7 @@ namespace MyWidget {
          * Инстанс api
          */
         protected apiInstance: Api;
+
         /**
          * Constructor
          * @param {Api} instance
@@ -57,19 +59,19 @@ namespace MyWidget {
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
             //todo перенести эту строчку в widgetCOntainer и убрать аргументы функции
-            console.log(await API.getSvg('http://172.10.1.10:9876/static/images/cryptocurrency/1inch.svg'))
+            // console.log(await API.getSvg('http://172.10.1.10:9876/static/images/cryptocurrency/1inch.svg'))
             fundData.fund = (await API.getCryptoWidget(this.fundId)).data
-            fundData.fund.id = this.fundId
-            fundData.cryptoList = (await API.getCryptoList()).data
-            fundData.fromCryptoForm = {
+            fundData.fund.id = Number(this.fundId)
+            selectInfo.cryptoList = (await API.getCryptoList()).data
+            selectInfo.fromCryptoForm = {
                 cryptoFrom: this.cryptoFrom,
                 payoutAddress: this.payoutAddress
             }
-            for (const key of ['btc', 'eth', fundData.fromCryptoForm.cryptoFrom]) {
+            for (const key of ['btc', 'eth', selectInfo.fromCryptoForm.cryptoFrom]) {
                 // @ts-ignore
-                fundData.hideCryptoList[key] = fundData.cryptoList[key]
+                selectInfo.hideCryptoList[key] = selectInfo.cryptoList[key]
                 // @ts-ignore
-                delete fundData.cryptoList[key]
+                delete selectInfo.cryptoList[key]
             }
             if (this.isWidgetPreview) {
                 fundData.fund.isWidgetPreview = this.isWidgetPreview

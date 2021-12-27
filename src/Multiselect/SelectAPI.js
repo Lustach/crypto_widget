@@ -1,4 +1,4 @@
-import BVSelect from "./js/bvselect";
+import BVSelect from "@/Multiselect/js/bvselect";
 
 export class Select{
     // this.select =

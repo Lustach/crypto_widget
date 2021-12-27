@@ -1,13 +1,14 @@
-import qr from '../images/qr.png';
-import copy from '../images/copy.svg'
-import {fundData} from "./fundData";
-import parseNumber from "../jsExtends/Math/Ceil"
+import qr from '@/images/qr.png';
+import copy from '@/images/copy.svg'
+import parseNumber from "@/jsExtends/Math/Ceil"
+import {transactionInfo} from '@/util/util'
+import {selectInfo} from "@/util/step1";
 
 export class Step2 {
     createSubTitle(): HTMLElement {
         let container = document.createElement('div')
         container.classList.add('w_blg-step_2__subtitle')
-        container.innerHTML = `Отправьте <span class="w_blg-step_2_ltc">${fundData.transactionInfo.currency_from.toUpperCase()}</span>* на адрес фонда`
+        container.innerHTML = `Отправьте <span class="w_blg-step_2_ltc">${transactionInfo.currency_from.toUpperCase()}</span>* на адрес фонда`
         return container
     }
 
@@ -20,6 +21,26 @@ export class Step2 {
         return container
     }
 
+    createBtnReady(): HTMLElement {
+        let footerBtnReady = document.createElement('div')
+        let footerBtnReadySpan = document.createElement('span')
+        footerBtnReady.classList.add('w_blg-step_footer')
+        footerBtnReadySpan.innerHTML = 'Готово'
+        footerBtnReady.appendChild(footerBtnReadySpan)
+        footerBtnReady.style.maxWidth = '179px'
+        footerBtnReady.style.right = '0'
+        footerBtnReady.style.left = 'auto'
+        footerBtnReady.style.borderRadius = '0px 0px 5px 0px'
+        return footerBtnReady
+        // footer.classList.add('w_blg-step_footer')
+        // footerImg.style.transform = 'rotate(180deg)'
+        // footerImg.style.marginRight = '11px'
+        // footerImg.style.marginLeft = '0'
+        // footer.style.maxWidth='179px'
+        // footer.appendChild(footerImg)
+        // footer.appendChild(footerSpan)
+    }
+
     createInput(labelName: string, inputValue: string): HTMLElement {
         let container = document.createElement('div')
         let input = document.createElement('input')
@@ -28,12 +49,12 @@ export class Step2 {
         let label = document.createElement('label')
         labelContainer.appendChild(label)
         // @ts-ignore
-        if (labelName === 'Адрес кошелька' && fundData.cryptoList[fundData.selectedCryptoKey].protocol && fundData.cryptoList[fundData.selectedCryptoKey].isToken) {
+        if (labelName === 'Адрес кошелька' && selectInfo.cryptoList[selectInfo.selectedCryptoKey].protocol && selectInfo.cryptoList[selectInfo.selectedCryptoKey].isToken) {
             // @ts-ignore
-            console.log(fundData.cryptoList[fundData.selectedCryptoKey])
+            console.log(selectInfo.cryptoList[selectInfo.selectedCryptoKey])
             let labelProtocol = document.createElement('span')
             // @ts-ignore
-            labelProtocol.innerHTML = fundData.cryptoList[fundData.selectedCryptoKey].protocol
+            labelProtocol.innerHTML = selectInfo.cryptoList[selectInfo.selectedCryptoKey].protocol
             labelContainer.appendChild(labelProtocol)
         }
         let icon = document.createElement('img')
@@ -56,7 +77,7 @@ export class Step2 {
     createInscription(): HTMLElement {
         let container = document.createElement('p')
         container.classList.add('w_blg-step_2__inscription')
-        container.innerHTML = `*Минимальная сумма: ${parseNumber(fundData.transactionInfo.min_amount_from)} ${fundData.transactionInfo.currency_from.toUpperCase()}`
+        container.innerHTML = `*Минимальная сумма: ${parseNumber(transactionInfo.min_amount_from)} ${transactionInfo.currency_from.toUpperCase()}`
         return container
     }
 }

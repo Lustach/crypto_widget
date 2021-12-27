@@ -1,40 +1,29 @@
-import {EventBus} from "../customEvents/eventBus";
-import {eventBus} from "../customEvents/eventBus";
+enum FundWidgetStatus {
+    ENABLED = 'ENABLED',
+    IN_PROGRESS = 'IN_PROGRESS',
+    DISABLED = 'DISABLED'
+}
 
-export let fundData = {
-    fund: {
+interface FundInfo {
+    logo: string,
+    name: string,
+    short_description: string,
+    status: FundWidgetStatus,
+    isWidgetPreview: boolean,
+    id: number,
+    // address: "14tCg7mLUE1GKYXy1V3XYYxpv4h7X7h3tz",
+    // cryptocurrency: "btc",
+    // fund: number,
+    // url: "/crypto_widget/1/",
+}
+
+export class FundData {
+    public fund: FundInfo = {
         logo: '',
         name: '',
         short_description: '',
-        status: '',
+        status: FundWidgetStatus.ENABLED,
         isWidgetPreview: false,
-        id: '',
-    },
-    selectedCrypto: {
-        fullName: '',
-    },
-    protocol: '',
-    selectedCryptoKey: '',
-    hideCryptoList: {},
-    cryptoList: {
-        btc: {},
-        bch: {},
-        bsv: {},
-    },
-    fromCryptoForm: {
-        payoutAddress: '',
-        cryptoFrom: '',
-    },
-    transactionInfo: {
-        min_amount_from: 0,
-        payin_address: '',
-        refund_address: '',
-        payin_address_qr: '',
-        payin_extra_id: '',//memo
-        currency_from: '',
-    },
-    BACKEND_HOST: 'http://172.10.1.10:9876',
-//    http://46.148.230.14:9876
-//http://172.10.1.10:9876
-//    https://voblago.io
+        id: 1,
+    }
 }

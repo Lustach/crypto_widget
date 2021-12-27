@@ -66,8 +66,8 @@ module.exports = {
         })],
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
-        // alias: {
-        //     fundInfo: path.resolve(__dirname, 'src/util/fundData.ts'), todo not work??
-        // }
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        }
     },
 };

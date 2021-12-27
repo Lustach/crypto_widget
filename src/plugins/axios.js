@@ -27,5 +27,5 @@ export const API = {
     // qQpB2Kv1z8QnKXPo5Th7
 }
 
-axios.defaults.baseURL = fundData.BACKEND_HOST
+axios.defaults.baseURL = 'http://localhost:8000'
 // axios.defaults.headers.common['Content-Type'] = 'text/plain';
