@@ -28,9 +28,9 @@ export class Step1 {
     createSearchIconToSelect() {
         setTimeout(() => {
             let searchIcon = document.createElement('img')
+            let selectRendered = document.querySelector('.bv_atual')
             searchIcon.setAttribute('src', search)
             searchIcon.setAttribute('id', 'bv_atual-search__icon')
-            let selectRendered = document.querySelector('.bv_atual')
             if (selectRendered) {
                 selectRendered.appendChild(searchIcon)
             }
@@ -53,7 +53,6 @@ export class Step1 {
 
     createCryptoSelect(): HTMLElement {
         this.createSearchIconToSelect()
-
         let select = document.createElement('select')
         select.setAttribute('id', 'selectBox')
 //todo
@@ -70,7 +69,6 @@ export class Step1 {
         option.setAttribute('data-img', item.image)
         option.setAttribute('data-key', value)
         if (item.isToken) {
-            // console.log(item)
             option.setAttribute('data-label', item.protocol)
         }
         option.innerHTML = item.fullName

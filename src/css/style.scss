@@ -119,7 +119,6 @@ h6, h5 {
         }
 
         &-item {
-
           cursor: pointer !important;
           //&:hover{
           //  background-color: #73b7ff !important;
@@ -139,7 +138,7 @@ h6, h5 {
           order: 0 !important;
           flex-grow: 1 !important;
           max-width: 152px !important;
-          width: 100% !important;
+          //width: 100% !important;
           background-color: white !important;
           font-style: normal !important;
           font-weight: 600 !important;
@@ -147,6 +146,11 @@ h6, h5 {
           line-height: 30px !important;
           text-align: center !important;
           color: #031726 !important;
+          @media(max-width: 358px){
+            &:nth-child(1){
+              margin-right: 3px;
+            }
+          }
           &:nth-child(2){
             img{
               margin-right: 3.36px !important;

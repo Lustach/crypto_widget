@@ -28,17 +28,14 @@ export class WidgetContainer extends Step2 {
         this.containerElement = containerElement
         let container = document.createElement('div')
         this.step1Container.classList.add('step1Container')
-        let header = document.createElement('div')
         let logoContainer = document.createElement('div')
         let logo = document.createElement('img')
         logoContainer.appendChild(logo)
         logoContainer.style.display = 'flex'
         logo.setAttribute('src', Logo)
-        this.stepIndex !== 3 ? logo.style.marginBottom = '19.57px' : logo.style.marginBottom = '62px'
-        header.classList.add('w_blg-step_header')
+        this.stepIndex !== 3 ? logo.style.marginBottom = '19.57px' : logo.style.marginBottom = '57.33px'
         container.classList.add('w_blg-step_container')
         container.appendChild(logoContainer)
-        container.appendChild(header)
         if (this.stepIndex !== 3) {
             container.appendChild(this.step1.createTitle())
         }
@@ -92,10 +89,8 @@ export class WidgetContainer extends Step2 {
 
     async createTransaction() {
         let data = {
-            currency_from: selectInfo.selectedCryptoKey,
-            currency_to: selectInfo.fromCryptoForm.cryptoFrom,
-            payout_address: selectInfo.fromCryptoForm.payoutAddress,
-            crypto_widget: fundData.fund.id
+            currency: selectInfo.selectedCryptoKey,
+            fund: fundData.fund.id
         }
         const result: ITransactionInfo = (await API.createTransaction(data)).data
         transactionInfo.create(result)
@@ -157,7 +152,7 @@ export class WidgetContainer extends Step2 {
         let fundLogo = document.createElement('img')
         let fundTitle = document.createElement('h6')
         fundHeader.classList.add('w_blg-fund__header')
-        fundLogo.setAttribute('src', 'http://localhost:8000' + fundData.fund.logo)
+        fundLogo.setAttribute('src', 'http://172.10.1.10:9876' + fundData.fund.logo)
         fundTitle.innerHTML = fundData.fund.name
         if (fundData.fund.logo) {
             fundHeader.appendChild(fundLogo)
@@ -171,9 +166,6 @@ export class WidgetContainer extends Step2 {
             container.appendChild(fundInfo)
         }
         container.classList.add('w_blg-step_1__container')
-        if (this.stepIndex === 3) {
-            container.style.marginTop = '-4px'
-        }
         return container
     }
 

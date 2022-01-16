@@ -41,10 +41,12 @@ Developed by: Bruno Vieira
     align-items: center;
     justify-content: space-between;
 }
-.bv_atual span span{
+
+.bv_atual span span {
     font-size: 13px !important;
     font-weight: 500 !important;
 }
+
 .bv_atual:before {
     /*content: '';*/
     /*!*background-image: url("/src/images/arrow.svg");*!*/
@@ -83,7 +85,7 @@ Developed by: Bruno Vieira
     object-fit: contain;
 }
 
-.bv_atual_item__img{
+.bv_atual_item__img {
     /*max-width: 30px; !* Change to fit your images *!*/
     /*width:30px;*/
     /*height: 30px !important;*/
@@ -91,12 +93,15 @@ Developed by: Bruno Vieira
     /*margin-left: 26%;*/
     object-fit: fill !important;
     max-width: 24px !important;
+    filter: invert(27%) sepia(84%) saturate(1526%) hue-rotate(184deg) brightness(102%) contrast(88%);
 }
-.bv_atual-selected__item span{
+
+.bv_atual-selected__item span {
     position: relative;
     margin-left: 8px;
 }
-.bv_atual-selected__item span span{
+
+.bv_atual-selected__item span span {
     position: absolute;
     top: -6px;
     right: -46px;
@@ -109,6 +114,7 @@ Developed by: Bruno Vieira
     text-align: center;
 
 }
+
 .down {
     margin-top: -5px !important;
 }
@@ -152,27 +158,6 @@ Developed by: Bruno Vieira
     margin-top: 2px
 }
 
-.bv_ul_mobile {
-    width: 100% !important;
-    position: fixed !important;
-    /*top: 5% !important;*/
-    /*left: 10% !important;*/
-    border: 0px !important;
-    /*height: 90% !important;*/
-    margin: 0px !important;
-    overflow-y: scroll;
-    max-height: 100% !important;
-    left: 0 !important;
-    /*top: 57px !important;*/
-    height: 100% !important;
-    border-radius: 0 !important;
-    z-index: 1000000 !important;
-}
-
-.bv_ul_mobile li input {
-    height: auto !important;
-    margin-bottom: 10px;
-}
 
 .bv_ul_bg {
     position: fixed;
@@ -229,11 +214,11 @@ Developed by: Bruno Vieira
     height: 38px;
 }
 
-.bv_ul_inner li span{
+.bv_ul_inner li span {
     position: relative;
 }
 
-.bv_ul_inner li span span{
+.bv_ul_inner li span span {
     font-weight: 500 !important;
     position: absolute;
     top: -6px;
@@ -268,6 +253,7 @@ Developed by: Bruno Vieira
     max-width: 24px; /* Change to fit your images */
     width: 30px;
     height: 30px !important;
+    filter: invert(27%) sepia(84%) saturate(1526%) hue-rotate(184deg) brightness(102%) contrast(88%);
     /*object-fit: contain;*/
 }
 
@@ -321,6 +307,27 @@ Developed by: Bruno Vieira
 /*    !*width: 10px;*!*/
 /*    !*height: 10px;*!*/
 /*}*/
+.bv_ul_mobile {
+    width: 100% !important;
+    position: fixed !important;
+    /*top: 5% !important;*/
+    /*left: 10% !important;*/
+    border: 0px !important;
+    /*height: 90% !important;*/
+    margin: 0px !important;
+    overflow-y: scroll;
+    max-height: 100% !important;
+    left: 0 !important;
+    /*top: 57px !important;*/
+    height: 100% !important;
+    border-radius: 0 !important;
+    z-index: 1000000 !important;
+}
+
+.bv_ul_mobile li input {
+    height: auto !important;
+    margin-bottom: 10px;
+}
 
 *:focus {
     outline: none !important;

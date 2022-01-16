@@ -3,44 +3,17 @@ import {Select} from "@/Multiselect/SelectAPI";
 import {API as API} from "@/plugins/axios";
 import {fundData} from "@/util/util";
 import {selectInfo} from '@/util/step1'
-// импорты css файлов..
 import('@/css/style.scss')
 import('@/Multiselect/css/bvselect.css')
 namespace MyWidget {
-    /**
-     * Виджет кнопки
-     */
     class Widget {
-        /**
-         * Внутренний id кнопки
-         */
-
-        /**
-         * DOM элемент контейнера
-         */
         protected containerElement: HTMLElement;
-        /*
-        * Айди фонда для запросов
-        * */
         protected fundId: string;
-
         protected isWidgetPreview: boolean;
         protected payoutAddress: string;
         protected cryptoFrom: string;
-        /**
-         * Инстанс api
-         */
         protected apiInstance: Api;
 
-        /**
-         * Constructor
-         * @param {Api} instance
-         * @param {string} containerId
-         * @param fundId
-         * @param isWidgetPreview
-         * @param payoutAddress
-         * @param cryptoFrom
-         */
         public constructor(instance: Api, containerId: string, fundId: string, isWidgetPreview: boolean, payoutAddress: string, cryptoFrom: string) {
             this.apiInstance = instance;
             this.containerElement = <HTMLElement>document.getElementById(containerId);
@@ -49,16 +22,12 @@ namespace MyWidget {
             this.cryptoFrom = cryptoFrom
             this.payoutAddress = payoutAddress
         }
-
-        /**
-         * Инициализация
-         */
         public async init(): Promise<void> {
             let widget = new WidgetContainer()
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
             //todo перенести эту строчку в widgetCOntainer и убрать аргументы функции
-            // console.log(await API.getSvg('http://172.10.1.10:9876/static/images/cryptocurrency/1inch.svg'))
+            // console.log(await API.getSvg('http://172.10.1.10:9878/static/images/cryptocurrency/1inch.svg'))
             fundData.fund = (await API.getCryptoWidget(this.fundId)).data
             fundData.fund.id = Number(this.fundId)
             selectInfo.cryptoList = (await API.getCryptoList()).data
@@ -86,25 +55,11 @@ namespace MyWidget {
      * Основной класс Api
      */
     export class Api {
-
-        /**
-         * Виджет кнопки
-         * @param {string} containerId
-         * @param {string} fundId
-         * @param isWidgetPreview
-         * @param payoutAddress
-         * @param cryptoFrom
-         * @return {MyWidget.Widget}
-         */
         public async widgetContainer(containerId: string, fundId: string, isWidgetPreview: boolean, payoutAddress: string, cryptoFrom: string): Promise<Widget> {
             const widget = new Widget(this, containerId, fundId, isWidgetPreview, payoutAddress, cryptoFrom);
             await widget.init();
             return widget;
         }
-
-        /**
-         * Запуск колбеков инициализации
-         */
         public runInitCallbacks(): void {
             let myCompanyApiInitCallbacks = (window as any).myCompanyApiInitCallbacks;
             if (myCompanyApiInitCallbacks && myCompanyApiInitCallbacks.length) {

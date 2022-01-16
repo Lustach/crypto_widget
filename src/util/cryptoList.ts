@@ -14,12 +14,10 @@ type cryptoList = {
 interface selectInfo {
     hideCryptoList: cryptoList
     cryptoList: cryptoList
-
     selectedCrypto: cryptoListItem
     selectedCryptoKey: string
     fromCryptoForm: fromCryptoForm
 }
-
 
 export class CryptoList implements selectInfo {
     public hideCryptoList = {
