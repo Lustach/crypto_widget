@@ -1,7 +1,7 @@
-import {eventBus} from "@/customEvents/eventBus";
+import {eventBus} from "@/util/customEvents/eventBus";
 import search from "@/images/search.svg";
-import {CryptoList} from "@/util/cryptoList";
-import {fundData} from '@/util/util'
+import {CryptoList} from "@/app/model/cryptoList";
+import {fundData} from '@/app/widgetContainer'
 
 
 export let selectInfo = new CryptoList()

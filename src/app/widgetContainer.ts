@@ -2,13 +2,13 @@ import btc from '@/images/btc.svg'
 import eth from '@/images/eth.svg'
 import arrow from '@/images/arrow.svg'
 import Logo from '@/images/Logo.svg'
-import {Step1} from "@/util/step1";
-import {Step2} from "@/util/step2";
-import {Step3} from "@/util/step3";
-import {ITransactionInfo, TransactionInfo} from "@/util/Transaction";
-import {FundData} from "@/util/fundData";
-import {selectInfo} from "@/util/step1";
-import {eventBus} from "@/customEvents/eventBus";
+import {Step1} from "@/app/step1";
+import {Step2} from "@/app/step2";
+import {Step3} from "@/app/step3";
+import {ITransactionInfo, TransactionInfo} from "@/app/model/Transaction";
+import {FundData} from "@/app/model/fundData";
+import {selectInfo} from "@/app/step1";
+import {eventBus} from "@/util/customEvents/eventBus";
 import {API} from "@/plugins/axios";
 
 export let transactionInfo = new TransactionInfo()
@@ -106,8 +106,14 @@ export class WidgetContainer extends Step2 {
                 footer.setAttribute('disabled', 'disabled')
                 if (selectInfo.selectedCryptoKey) {
                     if (this.stepIndex === 1) {
-                        this.stepIndex = 2
-                        await this.createTransaction()
+                        try {
+                            await this.createTransaction()
+                            this.stepIndex = 2
+                        } catch (e) {
+                            console.error(e)
+                            footer.removeAttribute('disabled')
+                            return
+                        }
                         this.rerenderContainer()
                     } else if (this.stepIndex === 2) {
                         this.stepIndex = 1

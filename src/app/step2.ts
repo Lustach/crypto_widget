@@ -1,8 +1,8 @@
 import qr from '@/images/qr.png';
 import copy from '@/images/copy.svg'
-import parseNumber from "@/jsExtends/Math/Ceil"
-import {transactionInfo} from '@/util/util'
-import {selectInfo} from "@/util/step1";
+import parseNumber from "@/util/jsExtends/Math/Ceil"
+import {transactionInfo} from '@/app/widgetContainer'
+import {selectInfo} from "@/app/step1";
 
 export class Step2 {
     createSubTitle(): HTMLElement {

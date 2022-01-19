@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {fundData} from "../util/fundData";
 
 export const API = {
     // fill_profile: {

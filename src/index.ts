@@ -1,8 +1,8 @@
-import {WidgetContainer} from "@/util/util";
+import {WidgetContainer} from "@/app/widgetContainer";
 import {Select} from "@/Multiselect/SelectAPI";
 import {API as API} from "@/plugins/axios";
-import {fundData} from "@/util/util";
-import {selectInfo} from '@/util/step1'
+import {fundData} from "@/app/widgetContainer";
+import {selectInfo} from '@/app/step1'
 import('@/css/style.scss')
 import('@/Multiselect/css/bvselect.css')
 namespace MyWidget {
