@@ -55,7 +55,7 @@ export class Step1 {
         this.createSearchIconToSelect()
         let select = document.createElement('select')
         select.setAttribute('id', 'selectBox')
-//todo
+
         for (const [listItem, value] of Object.entries(selectInfo.cryptoList)) {
             select.appendChild(this.createSelectOption(listItem, value))
         }
