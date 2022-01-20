@@ -27,7 +27,6 @@ namespace MyWidget {
             this.containerElement.style.maxWidth = '360px'
             this.containerElement.style.width = '100%'
             //todo перенести эту строчку в widgetCOntainer и убрать аргументы функции
-            // console.log(await API.getSvg('http://172.10.1.10:9878/static/images/cryptocurrency/1inch.svg'))
             fundData.fund = (await API.getCryptoWidget(this.fundId)).data
             fundData.fund.id = Number(this.fundId)
             selectInfo.cryptoList = (await API.getCryptoList()).data

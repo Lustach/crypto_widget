@@ -15,14 +15,6 @@ export const API = {
     getCryptoWidget: (id) => axios.get(`/crypto_widgets/${id}/`),
     getCryptoList: () => axios.get('/currency/'),
     createTransaction: (data) => axios.post('crypto_transactions/', {...data}),
-    getSvg: (url) => axios.get(url, {
-        baseURL: 'http://172.10.1.10:9876',
-        headers: {
-            // 'content-type': 'text/plain',
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        }
-    })
     // qQpB2Kv1z8QnKXPo5Th7
 }
 
