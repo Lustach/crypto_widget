@@ -55,9 +55,9 @@ export class WidgetContainer extends Step2 {
             container.appendChild(this.createQr(transactionInfo.payin_address_qr))
             let inputContainer = document.createElement('div')
             inputContainer.classList.add('w_blg-step_2__inputs-container')
-            let firstInput = inputContainer.appendChild(this.createInput('Адрес кошелька', transactionInfo.payin_address))
-            if (transactionInfo.payin_extra_id) {
-                inputContainer.appendChild(this.createInput('MEMO', transactionInfo.payin_extra_id))
+            let firstInput = inputContainer.appendChild(this.createInput('Адрес кошелька', transactionInfo.additional_data.payin_address))
+            if (transactionInfo.additional_data.payin_extra_id) {
+                inputContainer.appendChild(this.createInput('MEMO', transactionInfo.additional_data.payin_extra_id))
             } else {
                 firstInput.style.marginBottom = '0px'
             }
