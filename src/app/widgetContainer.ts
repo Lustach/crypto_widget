@@ -2,13 +2,13 @@ import btc from '@/images/btc.svg'
 import eth from '@/images/eth.svg'
 import arrow from '@/images/arrow.svg'
 import Logo from '@/images/Logo.svg'
-import {Step1} from "@/util/step1";
-import {Step2} from "@/util/step2";
-import {Step3} from "@/util/step3";
-import {ITransactionInfo, TransactionInfo} from "@/util/Transaction";
-import {FundData} from "@/util/fundData";
-import {selectInfo} from "@/util/step1";
-import {eventBus} from "@/customEvents/eventBus";
+import {Step1} from "@/app/step1";
+import {Step2} from "@/app/step2";
+import {Step3} from "@/app/step3";
+import {ITransactionInfo, TransactionInfo} from "@/app/model/Transaction";
+import {FundData} from "@/app/model/fundData";
+import {selectInfo} from "@/app/step1";
+import {eventBus} from "@/util/customEvents/eventBus";
 import {API} from "@/plugins/axios";
 
 export let transactionInfo = new TransactionInfo()
@@ -30,6 +30,8 @@ export class WidgetContainer extends Step2 {
         this.step1Container.classList.add('step1Container')
         let logoContainer = document.createElement('div')
         let logo = document.createElement('img')
+        logo.setAttribute('width','128')
+        logo.setAttribute('height','40')
         logoContainer.appendChild(logo)
         logoContainer.style.display = 'flex'
         logo.setAttribute('src', Logo)
@@ -55,9 +57,9 @@ export class WidgetContainer extends Step2 {
             container.appendChild(this.createQr(transactionInfo.payin_address_qr))
             let inputContainer = document.createElement('div')
             inputContainer.classList.add('w_blg-step_2__inputs-container')
-            let firstInput = inputContainer.appendChild(this.createInput('Адрес кошелька', transactionInfo.payin_address))
-            if (transactionInfo.payin_extra_id) {
-                inputContainer.appendChild(this.createInput('MEMO', transactionInfo.payin_extra_id))
+            let firstInput = inputContainer.appendChild(this.createInput('Адрес кошелька', transactionInfo.additional_data.payin_address))
+            if (transactionInfo.additional_data.payin_extra_id) {
+                inputContainer.appendChild(this.createInput('MEMO', transactionInfo.additional_data.payin_extra_id))
             } else {
                 firstInput.style.marginBottom = '0px'
             }
@@ -106,8 +108,14 @@ export class WidgetContainer extends Step2 {
                 footer.setAttribute('disabled', 'disabled')
                 if (selectInfo.selectedCryptoKey) {
                     if (this.stepIndex === 1) {
-                        this.stepIndex = 2
-                        await this.createTransaction()
+                        try {
+                            await this.createTransaction()
+                            this.stepIndex = 2
+                        } catch (e) {
+                            console.error(e)
+                            footer.removeAttribute('disabled')
+                            return
+                        }
                         this.rerenderContainer()
                     } else if (this.stepIndex === 2) {
                         this.stepIndex = 1
@@ -152,7 +160,9 @@ export class WidgetContainer extends Step2 {
         let fundLogo = document.createElement('img')
         let fundTitle = document.createElement('h6')
         fundHeader.classList.add('w_blg-fund__header')
-        fundLogo.setAttribute('src', 'http://172.10.1.10:9876' + fundData.fund.logo)
+        fundLogo.setAttribute('src', process.env.PROD_URL + fundData.fund.logo)
+        fundLogo.setAttribute('width','98')
+        fundLogo.setAttribute('width','57')
         fundTitle.innerHTML = fundData.fund.name
         if (fundData.fund.logo) {
             fundHeader.appendChild(fundLogo)

@@ -1,9 +1,11 @@
-require('webpack');
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const miniCss = require('mini-css-extract-plugin');
+const dotenv = require('dotenv')
+dotenv.config();
 module.exports = {
-    entry: ['./src/index.ts','./src/util/util.ts','./src/util/step2.ts','./src/util/step3.ts',],
+    entry: ['./src/index.ts', './src/app/widgetContainer.ts', './src/app/step2.ts', './src/app/step3.ts',],
     mode: 'development',
     devServer: {
         static: path.join(__dirname, 'dist'),
@@ -63,7 +65,11 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({template: './src/index.html'}),
         new miniCss({
             filename: '../style.css',
-        })],
+        }),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(process.env)
+        })
+    ],
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
         alias: {

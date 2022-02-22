@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {fundData} from "../util/fundData";
 
 export const API = {
     // fill_profile: {
@@ -13,19 +12,10 @@ export const API = {
     //     }
     // }),
     // }
-    getCryptoWidget: (id) => axios.get(`/crypto_widgets/${id}/`),
-    getCryptoList: () => axios.get('/currency/'),
-    createTransaction: (data) => axios.post('crypto_transactions/', {...data}),
-    getSvg: (url) => axios.get(url, {
-        baseURL: 'http://172.10.1.10:9876',
-        headers: {
-            // 'content-type': 'text/plain',
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        }
-    })
+    getCryptoWidget: (id) => axios.get(`/donation/crypto_widgets/${id}/`),
+    getCryptoList: () => axios.get('/donation/currency/'),
+    createTransaction: (data) => axios.post('/donation/crypto_transactions/', {...data}),
     // qQpB2Kv1z8QnKXPo5Th7
 }
-
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = process.env.PROD_URL
 // axios.defaults.headers.common['Content-Type'] = 'text/plain';

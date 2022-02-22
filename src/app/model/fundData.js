@@ -30,5 +30,5 @@ exports.fundData = {
             "image": "https://changehero.io/static/images/coins/rep.svg"
         }
     ],
-    BACKEND_HOST: 'http://localhost:8000',
+    BACKEND_HOST: process.env.PROD_URL,
 };

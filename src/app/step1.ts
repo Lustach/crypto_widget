@@ -1,7 +1,7 @@
-import {eventBus} from "@/customEvents/eventBus";
+import {eventBus} from "@/util/customEvents/eventBus";
 import search from "@/images/search.svg";
-import {CryptoList} from "@/util/cryptoList";
-import {fundData} from '@/util/util'
+import {CryptoList} from "@/app/model/cryptoList";
+import {fundData} from '@/app/widgetContainer'
 
 
 export let selectInfo = new CryptoList()
@@ -31,6 +31,8 @@ export class Step1 {
             let selectRendered = document.querySelector('.bv_atual')
             searchIcon.setAttribute('src', search)
             searchIcon.setAttribute('id', 'bv_atual-search__icon')
+            searchIcon.setAttribute('width', '20')
+            searchIcon.setAttribute('height', '20')
             if (selectRendered) {
                 selectRendered.appendChild(searchIcon)
             }
@@ -55,7 +57,7 @@ export class Step1 {
         this.createSearchIconToSelect()
         let select = document.createElement('select')
         select.setAttribute('id', 'selectBox')
-//todo
+
         for (const [listItem, value] of Object.entries(selectInfo.cryptoList)) {
             select.appendChild(this.createSelectOption(listItem, value))
         }
@@ -81,6 +83,8 @@ export class Step1 {
         let btnImg = document.createElement('img')
         let btnName = document.createElement('span')
         btnImg.setAttribute('src', btnImgSrc)
+        btnImg.setAttribute('width', '24')
+        btnImg.setAttribute('height', '24')
         btnName.innerHTML = btnNameD
         btn.appendChild(btnImg)
         btn.appendChild(btnName)
@@ -107,6 +111,9 @@ export class Step1 {
                 this.setCryptoBtnListUnActive()
                 btn.classList.add('w_blg-step_1_crypto-item--active')
             })
+        } else {
+            btn.style.setProperty("background-color", "white", "important");
+            // btn.style.backgroundColor = "fff !important"
         }
         return btn
     }

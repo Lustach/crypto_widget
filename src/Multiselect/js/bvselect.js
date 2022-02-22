@@ -1,6 +1,6 @@
-import {fundData} from '@/util/util'
-import {eventBus} from "@/customEvents/eventBus";
-import {selectInfo} from "@/util/step1";
+import {fundData} from '@/app/widgetContainer'
+import {eventBus} from "@/util/customEvents/eventBus";
+import {selectInfo} from "@/app/step1";
 import {API as API} from "@/plugins/axios";
 export default class BVSelect {
 
