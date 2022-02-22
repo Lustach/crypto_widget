@@ -30,6 +30,8 @@ export class WidgetContainer extends Step2 {
         this.step1Container.classList.add('step1Container')
         let logoContainer = document.createElement('div')
         let logo = document.createElement('img')
+        logo.setAttribute('width','128')
+        logo.setAttribute('height','40')
         logoContainer.appendChild(logo)
         logoContainer.style.display = 'flex'
         logo.setAttribute('src', Logo)
@@ -158,7 +160,9 @@ export class WidgetContainer extends Step2 {
         let fundLogo = document.createElement('img')
         let fundTitle = document.createElement('h6')
         fundHeader.classList.add('w_blg-fund__header')
-        fundLogo.setAttribute('src', 'http://172.10.1.10:9876' + fundData.fund.logo)
+        fundLogo.setAttribute('src', process.env.PROD_URL + fundData.fund.logo)
+        fundLogo.setAttribute('width','98')
+        fundLogo.setAttribute('width','57')
         fundTitle.innerHTML = fundData.fund.name
         if (fundData.fund.logo) {
             fundHeader.appendChild(fundLogo)
